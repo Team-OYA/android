@@ -1,9 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ThePop" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.ThePop" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:textViewStyle">@style/PretendardFontStyle</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="color">@color/black</item>
     </style>
 
     <style name="Theme.ThePop" parent="Base.Theme.ThePop" />
+
+    <style name="PretendardFontStyle">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+
+    <style name="PretendardSemiBoldFontStyle">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+    <style name="PretendardBoldFontStyle">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+    <style name="CamptonFontStyle">
+        <item name="android:fontFamily">@font/campton_medium</item>
+    </style>
+
+    <style name="CamptonSemiBoldFontStyle">
+        <item name="android:fontFamily">@font/campton_semibold</item>
+    </style>
+
+    <style name="CamptonBoldFontStyle">
+        <item name="android:fontFamily">@font/campton_bold</item>
+    </style>
 </resources>
