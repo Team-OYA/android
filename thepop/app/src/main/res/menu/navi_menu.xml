@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/navi_home"
+        android:enabled="true"
+        android:icon="@drawable/vi_navi_home"
+        android:title="@string/navi_home"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/navi_community"
+        android:enabled="true"
+        android:icon="@drawable/vi_navi_community"
+        android:title="@string/navi_commnunity"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/navi_taste"
+        android:enabled="true"
+        android:icon="@drawable/vi_navi_taste"
+        android:title="@string/navi_taste"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/navi_mypage"
+        android:enabled="true"
+        android:icon="@drawable/vi_navi_mypage"
+        android:title="@string/navi_mypage"
+        app:showAsAction="ifRoom"/>
+
+</menu>
+
