@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navi_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.thepop.android.ui.home.HomeFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_community"
+            app:destination="@id/fragment_community" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_mypage"
+            app:destination="@id/fragment_mypage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_community"
+        android:name="com.thepop.android.ui.community.CommunityFragment"
+        android:label="Community">
+        <action
+            android:id="@+id/action_fragment_community_to_fragment_home"
+            app:destination="@id/fragment_home" />
+        <action
+            android:id="@+id/action_fragment_community_to_fragment_mypage"
+            app:destination="@id/fragment_mypage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_mypage"
+        android:name="com.thepop.android.ui.mypage.MyPageFragment"
+        android:label="Mypage">
+        <action
+            android:id="@+id/action_fragment_mypage_to_fragment_community"
+            app:destination="@id/fragment_community" />
+        <action
+            android:id="@+id/action_fragment_mypage_to_fragment_home"
+            app:destination="@id/fragment_home" />
+    </fragment>
+
+</navigation>

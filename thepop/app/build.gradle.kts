@@ -59,5 +59,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
     implementation("com.google.dagger:hilt-android:2.40.5")
     implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
 }
