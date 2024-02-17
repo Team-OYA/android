@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">THE POP</string>
+
+
+    <!-- Navigation bar -->
+    <string name="navi_home">홈</string>
+    <string name="navi_commnunity">커뮤니티</string>
+    <string name="navi_taste">취향찾기</string>
+    <string name="navi_mypage">마이페이지</string>
+
+
 </resources>
