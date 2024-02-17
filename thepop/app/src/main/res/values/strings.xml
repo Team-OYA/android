@@ -7,6 +7,8 @@
     <string name="navi_commnunity">커뮤니티</string>
     <string name="navi_taste">취향찾기</string>
     <string name="navi_mypage">마이페이지</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
