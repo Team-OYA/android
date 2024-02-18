@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.HomeMainFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_home_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeMainFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_blur"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:background="@drawable/bg_home_tab"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.jgabrielfreitas.core.BlurImageView
+                android:id="@+id/iv_blur"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_ad_test"
+                android:scaleType="fitStart">
+            </com.jgabrielfreitas.core.BlurImageView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:translationZ="1dp"
+                android:background="@drawable/bg_home_tab">
+            </View>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_ad_images"
+            android:layout_width="match_parent"
+            android:layout_height="540dp"
+            android:scaleType="fitXY"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="16dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="120dp"
+            app:layout_constraintTop_toTopOf="parent">
+        </androidx.viewpager2.widget.ViewPager2>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

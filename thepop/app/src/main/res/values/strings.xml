@@ -7,8 +7,11 @@
     <string name="navi_commnunity">커뮤니티</string>
     <string name="navi_taste">취향찾기</string>
     <string name="navi_mypage">마이페이지</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Home -->
+    <string name="home_tab1">홈</string>
+    <string name="home_tab2">진행중인 팝업</string>
+    <string name="home_tab3">예정된 팝업</string>
 
 
 </resources>

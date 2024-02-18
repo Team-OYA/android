@@ -10,11 +10,8 @@ import com.thepop.android.databinding.FragmentHomeMainBinding
 
 class HomeMainFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: com.thepop.android.databinding.FragmentHomeMainBinding
+    private val adImageList = arrayListOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,4 +21,29 @@ class HomeMainFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        blurImage()
+        setupViewPager()
+    }
+
+    private fun blurImage() {
+        val blurImageView = binding.ivBlur
+        blurImageView.setBlur(9)
+    }
+
+    private fun setupViewPager() {
+        val viewPager = binding.vpAdImages
+        setAdImageList()
+        val adImageAdapter = HomeMainPagerAdapter(adImageList)
+        viewPager.adapter = adImageAdapter
+        viewPager.offscreenPageLimit = 3
+
+    }
+
+    private fun setAdImageList() {
+        adImageList.add(R.drawable.img_ad_test)
+        adImageList.add(R.drawable.img_ad_test)
+        adImageList.add(R.drawable.img_ad_test)
+    }
 }
