@@ -27,9 +27,7 @@ class HomeMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        blurImageView = binding.ivBlur
         setupViewPager()
-        blurImage()
     }
 
     private fun setupViewPager() {

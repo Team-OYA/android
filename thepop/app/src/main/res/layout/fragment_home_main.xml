@@ -14,38 +14,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_blur"
-            android:layout_width="match_parent"
-            android:layout_height="580dp"
-            android:background="@drawable/bg_home_tab"
-            app:layout_constraintTop_toTopOf="parent">
-            <com.jgabrielfreitas.core.BlurImageView
-                android:id="@+id/iv_blur"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/img_ad_test"
-                android:scaleType="fitStart">
-            </com.jgabrielfreitas.core.BlurImageView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:translationZ="1dp"
-                android:background="@drawable/bg_home_tab">
-            </View>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_ad_images"
             android:layout_width="match_parent"
-            android:layout_height="540dp"
-            android:scaleType="fitXY"
+            android:layout_height="660dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:padding="16dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp"
-            android:layout_marginTop="96dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
         </androidx.viewpager2.widget.ViewPager2>
 
