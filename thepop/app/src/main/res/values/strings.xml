@@ -8,6 +8,12 @@
     <string name="navi_taste">취향찾기</string>
     <string name="navi_mypage">마이페이지</string>
 
+    <!-- OnBoarding -->
+    <string name="onboarding_next">다음</string>
+    <string name="onboarding_start">시작하기</string>
+    <string name="onboarding1_title">현대의 팝업들을 한눈에</string>
+    <string name="onboarding1_text">현대백화점에서 진행하는 팝업스토어\n 리스트를 확인하고 상세 정보도 확인하세요. </string>
+
     <!-- Home -->
     <string name="home_tab1">홈</string>
     <string name="home_tab2">진행중인 팝업</string>
@@ -20,6 +26,8 @@
     <string name="home_pop_up_content">29LIVE와 함께 기념하는 10월 10일 텐텐절. 10CM와 댓글 소통하고 실시간 라이브를 즐겨요</string>
     <string name="home_pop_up_date">2021.07.01</string>
     <string name="home_pop_up_tag">라이브</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
