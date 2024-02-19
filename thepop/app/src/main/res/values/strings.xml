@@ -12,6 +12,14 @@
     <string name="home_tab1">홈</string>
     <string name="home_tab2">진행중인 팝업</string>
     <string name="home_tab3">예정된 팝업</string>
+    <string name="home_recommend">RECOMMENDED POP-UP</string>
+    <string name="home_community">COMMUNITY POST</string>
+    <string name="home_now">NOW POP-UP</string>
+    <string name="home_scheduled">SCHEDULED POP-UP</string>
+    <string name="home_pop_up_title">10CM의 잠 못 이루는 밤</string>
+    <string name="home_pop_up_content">29LIVE와 함께 기념하는 10월 10일 텐텐절. 10CM와 댓글 소통하고 실시간 라이브를 즐겨요</string>
+    <string name="home_pop_up_date">2021.07.01</string>
+    <string name="home_pop_up_tag">라이브</string>
 
 
 </resources>
