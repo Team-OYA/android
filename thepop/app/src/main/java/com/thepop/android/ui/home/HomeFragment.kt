@@ -73,17 +73,15 @@ class HomeFragment : Fragment() {
                 binding.ivLogo.setImageResource(R.drawable.img_logo)
                 binding.ivSearch.setImageResource(R.drawable.vi_search_white)
                 binding.tlHome.tabTextColors = resources.getColorStateList(R.drawable.color_tab_home_main)
+                binding.tlHome.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
+                binding.fixed.setBackgroundColor(resources.getColor(R.color.transparent))
             }
-            1 -> {
-                binding.ivLogo.setImageResource(R.drawable.img_logo_color)
-                binding.ivSearch.setImageResource(R.drawable.vi_search)
-                binding.tlHome.tabTextColors = resources.getColorStateList(R.drawable.color_tab_home_other)
-                binding.fixed.setBackgroundColor(resources.getColor(R.color.white))
-            }
+
             else -> {
                 binding.ivLogo.setImageResource(R.drawable.img_logo_color)
                 binding.ivSearch.setImageResource(R.drawable.vi_search)
                 binding.tlHome.tabTextColors = resources.getColorStateList(R.drawable.color_tab_home_other)
+                binding.tlHome.setSelectedTabIndicatorColor(resources.getColor(R.color.black))
                 binding.fixed.setBackgroundColor(resources.getColor(R.color.white))
             }
         }
