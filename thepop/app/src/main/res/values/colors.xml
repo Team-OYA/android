@@ -5,10 +5,13 @@
     <color name="main_color">#49675A</color>
     <color name="main_text_color">#2E5A47</color>
     <color name="gray_text">#535353</color>
+    <color name="gray_div">#DBDBDB</color>
     <color name="gray1">#7A7A7A</color>
     <color name="gray2">#ECECEC</color>
     <color name="gray3">#B1B1B1</color>
     <color name="gray4">#F8F8F8</color>
     <color name="gray5">#8C8C8C</color>
     <color name="gray6">#676D75</color>
+    <color name="transparent">#00000000</color>
+    <color name="white_blur">#33000000</color>
 </resources>

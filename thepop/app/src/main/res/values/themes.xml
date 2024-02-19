@@ -31,4 +31,5 @@
     <style name="CamptonBoldFontStyle">
         <item name="android:fontFamily">@font/campton_bold</item>
     </style>
+
 </resources>
