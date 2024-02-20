@@ -29,8 +29,19 @@
     <string name="home_pop_up_content">29LIVE와 함께 기념하는 10월 10일 텐텐절. 10CM와 댓글 소통하고 실시간 라이브를 즐겨요</string>
     <string name="home_pop_up_date">2021.07.01</string>
     <string name="home_pop_up_tag">라이브</string>
+
     <!-- Taste -->
 
     <!-- MyPage -->
+    <string name="mypage">마이페이지</string>
+    <string name="mypage_tab1">내가 찜한 팝업</string>
+    <string name="mypage_tab2">관심 글</string>
+    <string name="mypage_setting">설정</string>
+    <string name="mypage_manage">계정 / 정보 관리</string>
+    <string name="mypage_push">푸시 알림 설정</string>
+    <string name="mypage_logout">로그아웃</string>
+    <string name="mypage_withdrawal">회원탈퇴</string>
+    <string name="mypage_profile_name">더팝님의\n프로필</string>
+    <string name="mypage_right">v1.0.0\nOYA All rights reserved</string>
 
 </resources>
