@@ -40,7 +40,10 @@ class ThepopSharedPrefernce @Inject constructor(@ApplicationContext private val 
     fun setUserId(userId: String) {
         val prefs: SharedPreferences = context.getSharedPreferences("USER_ID", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = prefs.edit()
+        editor.putString(USER_ID, userId) // 사용자 ID 저장
+        editor.apply()
     }
+
 
     fun getUserId(): String? {
         val prefs: SharedPreferences = context.getSharedPreferences("USER_ID", Context.MODE_PRIVATE)
