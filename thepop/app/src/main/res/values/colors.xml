@@ -12,6 +12,8 @@
     <color name="gray4">#F8F8F8</color>
     <color name="gray5">#8C8C8C</color>
     <color name="gray6">#676D75</color>
+    <color name="gray7">#F5F6F6</color>
     <color name="transparent">#00000000</color>
     <color name="white_blur">#33000000</color>
+    <color name="main_circle">#85CAAC</color>
 </resources>

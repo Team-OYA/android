@@ -67,6 +67,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.46")
     kapt("com.google.dagger:hilt-android-compiler:2.46")
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
 
 kapt {
