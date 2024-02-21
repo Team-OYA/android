@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.thepop.android.R
+import android.widget.Toast
 import com.thepop.android.databinding.FragmentCommunityDetailBinding
+import com.thepop.android.util.DialogUtil
 
 class CommunityDetailFragment : Fragment() {
 
@@ -25,4 +26,21 @@ class CommunityDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setDialog()
+    }
+
+    private fun setDialog() {
+        val dialog = DialogUtil(this)
+        binding.btnMore.setOnClickListener {
+            dialog.show {
+                if (it) {
+                    Toast.makeText(context, "Dialog OK", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Dialog Cancel", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }
