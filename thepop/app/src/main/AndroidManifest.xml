@@ -15,7 +15,8 @@
         tools:targetApi="34" >
         <activity
             android:name=".ui.community.WriteActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true" >

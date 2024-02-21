@@ -54,6 +54,7 @@
     <string name="community_write_content_hint">게시글의 내용을 작성해주세요</string>
     <string name="community_write_category_hint">카테고리를 선택해 주세요</string>
     <string name="community_write_vote_hint">항목 입력</string>
+    <string name="community_write">글 등록</string>
 
 
     <!-- Taste -->
@@ -69,5 +70,9 @@
     <string name="mypage_withdrawal">회원탈퇴</string>
     <string name="mypage_profile_name">더팝님의\n프로필</string>
     <string name="mypage_right">v1.0.0\nOYA All rights reserved</string>
+
+    <!-- Dialog -->
+    <string name="dialog_delete">삭제하기</string>
+    <string name="dialog_cancel">취소</string>
 
 </resources>

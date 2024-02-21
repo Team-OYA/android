@@ -25,5 +25,19 @@
         app:layout_constraintTop_toBottomOf="@+id/fixed">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_community"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/vi_write_community"
+        android:scaleType="center"
+        app:maxImageSize="32dp"
+        app:fabCustomSize="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
