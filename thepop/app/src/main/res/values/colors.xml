@@ -16,4 +16,5 @@
     <color name="transparent">#00000000</color>
     <color name="white_blur">#33000000</color>
     <color name="main_circle">#85CAAC</color>
+    <color name="red">#EF4362</color>
 </resources>

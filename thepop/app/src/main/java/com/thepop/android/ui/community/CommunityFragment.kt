@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.thepop.android.R
+import com.thepop.android.databinding.FragmentCommunityBinding
 
 class CommunityFragment : Fragment() {
 
@@ -15,18 +16,27 @@ class CommunityFragment : Fragment() {
     }
 
     private lateinit var viewModel: CommunityViewModel
+    private lateinit var binding: FragmentCommunityBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_community, container, false)
+        binding = FragmentCommunityBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        setFragment()
     }
 
+    private fun setFragment() {
+        val fragment = CommunityMainFragment()
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.replace(R.id.fl_community, fragment)
+        transaction.commit()
+    }
 }
