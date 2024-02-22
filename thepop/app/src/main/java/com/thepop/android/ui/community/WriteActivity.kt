@@ -2,10 +2,8 @@ package com.thepop.android.ui.community
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.thepop.android.R
 import com.thepop.android.databinding.ActivityWriteBinding
-import com.thepop.android.util.DialogUtil
+
 
 class WriteActivity : AppCompatActivity() {
 

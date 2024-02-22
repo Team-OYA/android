@@ -84,7 +84,7 @@
 							android:text="@string/taste_question1_second"
 							android:textSize="16sp"
 							android:background="@drawable/rb_taste_selector"
-							android:button="android:color/transparent"
+							android:button="@android:color/transparent"
 							android:gravity="center"
 							android:fontFamily="@font/pretendard_semibold"
 							android:textColor="@drawable/rb_taste_text"
@@ -100,7 +100,5 @@
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
