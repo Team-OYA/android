@@ -153,31 +153,53 @@
 					android:textStyle="bold"
 					app:layout_constraintTop_toTopOf="parent">
 				</TextView>
-				<LinearLayout
-					android:layout_width="74dp"
-					android:layout_height="74dp"
+				<androidx.core.widget.NestedScrollView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
 					android:layout_marginTop="12dp"
-					android:padding="1dp"
-					android:gravity="center"
-					android:clipToPadding="false"
-					app:layout_constraintTop_toBottomOf="@+id/tv_photo"
-					app:layout_constraintStart_toStartOf="parent"
-					>
-					<androidx.cardview.widget.CardView
-						android:id="@+id/cv_photo"
+					android:orientation="horizontal"
+					app:layout_constraintTop_toBottomOf="@+id/tv_photo">
+					<androidx.constraintlayout.widget.ConstraintLayout
 						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:background="@drawable/bg_vote"
-						app:cardCornerRadius="8dp">
-						<ImageView
-							android:id="@+id/iv_photo"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:src="@drawable/vi_plus"
-							android:scaleType="centerCrop">
-						</ImageView>
-					</androidx.cardview.widget.CardView>
-				</LinearLayout>
+						android:layout_height="match_parent">
+						<androidx.recyclerview.widget.RecyclerView
+							android:id="@+id/rv_photo"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="parent"
+							app:layout_constraintBottom_toBottomOf="parent">
+						</androidx.recyclerview.widget.RecyclerView>
+
+						<LinearLayout
+							android:layout_width="74dp"
+							android:layout_height="74dp"
+							android:padding="1dp"
+							android:gravity="center"
+							android:layout_marginStart="8dp"
+							android:clipToPadding="false"
+							app:layout_constraintTop_toTopOf="parent"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintStart_toEndOf="@id/rv_photo">
+							<androidx.cardview.widget.CardView
+								android:id="@+id/cv_photo"
+								android:layout_width="match_parent"
+								android:layout_height="match_parent"
+								android:background="@drawable/bg_vote"
+								app:cardCornerRadius="8dp">
+								<ImageView
+									android:id="@+id/iv_photo"
+									android:layout_width="match_parent"
+									android:layout_height="match_parent"
+									android:src="@drawable/vi_plus"
+									android:scaleType="centerCrop">
+								</ImageView>
+							</androidx.cardview.widget.CardView>
+						</LinearLayout>
+					</androidx.constraintlayout.widget.ConstraintLayout>
+				</androidx.core.widget.NestedScrollView>
+
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
 			<androidx.constraintlayout.widget.ConstraintLayout
