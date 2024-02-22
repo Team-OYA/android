@@ -32,7 +32,7 @@ class CommunityDetailFragment : Fragment() {
     }
 
     private fun setDialog() {
-        val dialog = DialogUtil(this)
+        val dialog = DialogUtil(this.requireActivity())
         binding.btnMore.setOnClickListener {
             dialog.show {
                 if (it) {

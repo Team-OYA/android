@@ -1,78 +1,88 @@
 <resources>
-    <string name="app_name">THE POP</string>
+	<string name="app_name">THE POP</string>
 
 
-    <!-- Navigation bar -->
-    <string name="navi_home">홈</string>
-    <string name="navi_commnunity">커뮤니티</string>
-    <string name="navi_taste">취향찾기</string>
-    <string name="navi_mypage">마이페이지</string>
+	<!-- Navigation bar -->
+	<string name="navi_home">홈</string>
+	<string name="navi_commnunity">커뮤니티</string>
+	<string name="navi_taste">취향찾기</string>
+	<string name="navi_mypage">마이페이지</string>
 
-    <!-- OnBoarding -->
-    <string name="onboarding_next">다음</string>
-    <string name="onboarding_start">시작하기</string>
-    <string name="onboarding1_title">현대의 팝업들을 한눈에</string>
-    <string name="onboarding1_text">현대백화점에서 진행하는 팝업스토어\n 리스트를 확인하고 상세 정보도 확인하세요. </string>
+	<!-- OnBoarding -->
+	<string name="onboarding_next">다음</string>
+	<string name="onboarding_start">시작하기</string>
+	<string name="onboarding1_title">현대의 팝업들을 한눈에</string>
+	<string name="onboarding1_text">현대백화점에서 진행하는 팝업스토어\n 리스트를 확인하고 상세 정보도 확인하세요. </string>
 
-    <!-- Splash -->
-    <string name="splash_login_kakao">카카오로 이용하기</string>
+	<!-- Splash -->
+	<string name="splash_login_kakao">카카오로 이용하기</string>
 
-    <!-- Home -->
-    <string name="home_tab1">홈</string>
-    <string name="home_tab2">진행중인 팝업</string>
-    <string name="home_tab3">예정된 팝업</string>
-    <string name="home_recommend">RECOMMENDED POP-UP</string>
-    <string name="home_community">COMMUNITY POST</string>
-    <string name="home_now">NOW POP-UP</string>
-    <string name="home_scheduled">SCHEDULED POP-UP</string>
-    <string name="home_pop_up_title">10CM의 잠 못 이루는 밤</string>
-    <string name="home_pop_up_content">29LIVE와 함께 기념하는 10월 10일 텐텐절. 10CM와 댓글 소통하고 실시간 라이브를 즐겨요</string>
-    <string name="home_pop_up_date">2021.07.01</string>
-    <string name="home_pop_up_tag">라이브</string>
+	<!-- Home -->
+	<string name="home_tab1">홈</string>
+	<string name="home_tab2">진행중인 팝업</string>
+	<string name="home_tab3">예정된 팝업</string>
+	<string name="home_recommend">RECOMMENDED POP-UP</string>
+	<string name="home_community">COMMUNITY POST</string>
+	<string name="home_now">NOW POP-UP</string>
+	<string name="home_scheduled">SCHEDULED POP-UP</string>
+	<string name="home_pop_up_title">10CM의 잠 못 이루는 밤</string>
+	<string name="home_pop_up_content">29LIVE와 함께 기념하는 10월 10일 텐텐절. 10CM와 댓글 소통하고 실시간 라이브를 즐겨요</string>
+	<string name="home_pop_up_date">2021.07.01</string>
+	<string name="home_pop_up_tag">라이브</string>
 
-    <!-- Community -->
-    <string name="community_title">커뮤니티</string>
-    <string name="community_tab1">전체</string>
-    <string name="community_tab2">홍보게시판</string>
-    <string name="community_tab3">자유게시판</string>
-    <string name="community_user_name">승민</string>
-    <string name="community_post_title">쥐구멍 팝업스토어 열래요</string>
-    <string name="community_post_content">쥐구멍 팝업스토어 열래요 쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요</string>
-    <string name="community_post_content_short">쥐구멍 팝업스토어 열래요 쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어...</string>
-    <string name="community_post_date">2024.01.31</string>
-    <string name="community_vote1">열어라</string>
-    <string name="community_vote2">열지 마라~~</string>
-    <string name="community_vote_percent1">53%</string>
-    <string name="community_vote_percent2">47%</string>
-    <string name="community_write_title_text">게시글 제목</string>
-    <string name="community_write_content_text">게시글 내용</string>
-    <string name="community_write_category_text">카테고리</string>
-    <string name="community_write_vote_text">투표 (선택사항)</string>
-    <string name="community_write_image_text">게시글 이미지( 선택사항)</string>
-    <string name="community_write_button">등록하기</string>
-    <string name="community_write_title_hint">글 제목을 입력해주세요</string>
-    <string name="community_write_content_hint">게시글의 내용을 작성해주세요</string>
-    <string name="community_write_category_hint">카테고리를 선택해 주세요</string>
-    <string name="community_write_vote_hint">항목 입력</string>
-    <string name="community_write">글 등록</string>
+	<!-- Community -->
+	<string name="community_title">커뮤니티</string>
+	<string name="community_tab1">전체</string>
+	<string name="community_tab2">홍보게시판</string>
+	<string name="community_tab3">자유게시판</string>
+	<string name="community_user_name">승민</string>
+	<string name="community_post_title">쥐구멍 팝업스토어 열래요</string>
+	<string name="community_post_content">쥐구멍 팝업스토어 열래요 쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요</string>
+	<string name="community_post_content_short">쥐구멍 팝업스토어 열래요 쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어 열래요쥐구멍 팝업스토어...</string>
+	<string name="community_post_date">2024.01.31</string>
+	<string name="community_vote1">열어라</string>
+	<string name="community_vote2">열지 마라~~</string>
+	<string name="community_vote_percent1">53%</string>
+	<string name="community_vote_percent2">47%</string>
+	<string name="community_write_title_text">게시글 제목</string>
+	<string name="community_write_content_text">게시글 내용</string>
+	<string name="community_write_category_text">카테고리</string>
+	<string name="community_write_vote_text">투표 (선택사항)</string>
+	<string name="community_write_image_text">게시글 이미지( 선택사항)</string>
+	<string name="community_write_button">등록하기</string>
+	<string name="community_write_title_hint">글 제목을 입력해주세요</string>
+	<string name="community_write_content_hint">게시글의 내용을 작성해주세요</string>
+	<string name="community_write_category_hint">카테고리를 선택해 주세요</string>
+	<string name="community_write_vote_hint">항목 입력</string>
+	<string name="community_write">글 등록</string>
 
 
-    <!-- Taste -->
+	<!-- Taste -->
+	<string name="taste_landing_title">문답을 통해\n팝업 취향을 찾아봐요</string>
+	<string name="taste_landing_contents">간단한 문답을 통해 내 팝업취향을 알아보고\n현대백화점의 팝업을 추천받아보세요.</string>
+	<string name="taste_find_analyze">분석하기</string>
+	<string name="taste_find_title">내 취향을 선택해주세요</string>
+	<string name="taste_find_contents">더팝님의 취향에 따라 선택하면\n팝업 취향을 찾아내고 추천해드려요.</string>
+	<string name="taste_question1">1. 무엇을 찾고 계신가요?</string>
+	<string name="taste_question1_first">치킨</string>
+	<string name="taste_question1_second">피자</string>
 
-    <!-- MyPage -->
-    <string name="mypage">마이페이지</string>
-    <string name="mypage_tab1">내가 찜한 팝업</string>
-    <string name="mypage_tab2">관심 글</string>
-    <string name="mypage_setting">설정</string>
-    <string name="mypage_manage">계정 / 정보 관리</string>
-    <string name="mypage_push">푸시 알림 설정</string>
-    <string name="mypage_logout">로그아웃</string>
-    <string name="mypage_withdrawal">회원탈퇴</string>
-    <string name="mypage_profile_name">더팝님의\n프로필</string>
-    <string name="mypage_right">v1.0.0\nOYA All rights reserved</string>
+	<!-- MyPage -->
+	<string name="mypage">마이페이지</string>
+	<string name="mypage_tab1">내가 찜한 팝업</string>
+	<string name="mypage_tab2">관심 글</string>
+	<string name="mypage_setting">설정</string>
+	<string name="mypage_manage">계정 / 정보 관리</string>
+	<string name="mypage_push">푸시 알림 설정</string>
+	<string name="mypage_logout">로그아웃</string>
+	<string name="mypage_withdrawal">회원탈퇴</string>
+	<string name="mypage_profile_name">더팝님의\n프로필</string>
+	<string name="mypage_right">v1.0.0\nOYA All rights reserved</string>
 
-    <!-- Dialog -->
-    <string name="dialog_delete">삭제하기</string>
-    <string name="dialog_cancel">취소</string>
+	<!-- Dialog -->
+	<string name="dialog_delete">삭제하기</string>
+	<string name="dialog_cancel">취소</string>
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
