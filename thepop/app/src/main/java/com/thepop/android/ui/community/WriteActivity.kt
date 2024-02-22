@@ -3,6 +3,7 @@ package com.thepop.android.ui.community
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.thepop.android.databinding.ActivityWriteBinding
+import com.thepop.android.util.PermissionUtil
 
 
 class WriteActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class WriteActivity : AppCompatActivity() {
         binding = ActivityWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setImagePlus()
         goBack()
     }
 
@@ -28,4 +30,17 @@ class WriteActivity : AppCompatActivity() {
         finish()
     }
 
+    //갤러리 열기
+    private fun setImagePlus() {
+
+        binding.ivPhoto.setOnClickListener {
+            PermissionUtil.checkGalleryPermission(this).let {
+                if (it) {
+                    PermissionUtil.openGallery(this)
+                } else {
+                    PermissionUtil.requestGalleryPermission(this)
+                }
+            }
+        }
+    }
 }
