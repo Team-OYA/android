@@ -31,4 +31,6 @@ class AuthLocalPreferences @Inject constructor(
 
     fun clear() = prefs.edit().clear().apply()
 
+    fun removeAccessToken() = prefs.edit().remove(ACCESS_TOKEN).apply()
+
 }
