@@ -1,9 +1,15 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
+
+val localPropertiesFile = File(rootProject.projectDir, "local.properties")
+val localProperties = Properties()
+localProperties.load(localPropertiesFile.reader())
 
 android {
     namespace = "com.thepop.android"
@@ -17,6 +23,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("base_url")}\"")
     }
 
     buildTypes {
@@ -38,6 +46,8 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
+        buildConfig = true
     }
 }
 
