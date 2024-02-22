@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.io.File
 
 plugins {
     id("com.android.application")
@@ -7,13 +8,15 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
-val localPropertiesFile = File(rootProject.projectDir, "local.properties")
-val localProperties = Properties()
-localProperties.load(localPropertiesFile.reader())
-
 android {
     namespace = "com.thepop.android"
     compileSdk = 34
+
+    // 로컬 프로퍼티 파일 읽기
+    val localPropertiesFile = File(rootProject.projectDir, "local.properties")
+    val localProperties = Properties()
+    localProperties.load(localPropertiesFile.reader())
+    var kakao_app_key = localProperties.getProperty("kakao_app_key")
 
     defaultConfig {
         applicationId = "com.thepop.android"
@@ -24,7 +27,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // BuildConfig 필드 및 manifestPlaceholders 설정
         buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("base_url")}\"")
+        buildConfigField("String", "KAKAO_APP_KEY", "\"$kakao_app_key\"")
     }
 
     buildTypes {
@@ -78,6 +83,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.46")
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.kakao.sdk:v2-user:2.15.0")
 }
 
 kapt {
