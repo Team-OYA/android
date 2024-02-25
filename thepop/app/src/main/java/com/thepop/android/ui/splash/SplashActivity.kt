@@ -5,15 +5,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility.getKeyHash
 import com.kakao.sdk.user.UserApiClient
 import com.thepop.android.MainActivity
+import com.thepop.android.data.service.UserService
 import com.thepop.android.databinding.ActivitySplashBinding
+import com.thepop.android.domain.repository.UserRepository
 import com.thepop.android.util.ThepopSharedPrefernce
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -21,7 +24,8 @@ import javax.inject.Inject
 class SplashActivity : AppCompatActivity() {
 
     @Inject lateinit var preference: ThepopSharedPrefernce
-
+    @Inject lateinit var userRepository: UserRepository
+    @Inject lateinit var userService: UserService
     private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,15 +33,14 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.e("SplashActivity", "keyHash: ${getKeyHash(this)}")
-
         init()
     }
 
     private fun init() {
         val accessToken = preference.getAccessToken()
         if (accessToken != null) {
-            goToMainActivity()
+//            goToMainActivity()
+            setLoginButton()
         } else {
             setLoginButton()
         }
@@ -71,6 +74,24 @@ class SplashActivity : AppCompatActivity() {
                     // 로그인 성공 부분
                     else if (token != null) {
                         val e = Log.e(/* tag = */ TAG, /* msg = */ "로그인 성공 ${token.accessToken}")
+                        lifecycleScope.launchWhenCreated {
+                            try {
+                                val response = userRepository.kakaoLogin(token.accessToken)
+
+                                Log.e("로그인", "response: $response")
+                            } catch (e: Exception) {
+                                Log.e("로그인", "error: $e")
+                            }
+                        }
+                        lifecycleScope.launch {
+                            try {
+                                val response2 = userRepository.getPopups("all", 0, 5)
+                                Log.e("팝업리스트", "response: $response2")
+                            } catch (e: Exception) {
+                                Log.e("팝업리스트", "error: $e")
+                            }
+                        }
+                        Log.e(TAG, "로그인 성공2")
                     }
                 }
             } else {
@@ -82,8 +103,9 @@ class SplashActivity : AppCompatActivity() {
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e(TAG, "로그인 실패 $error")
-        } else if (token != null) {
-            Log.e(TAG, "로그인 성공 ${token.accessToken}")
+        } else {
+            Log.e(TAG, "로그인 성공 ${token?.accessToken ?: "액세스 토큰이 없음"}")
         }
     }
+
 }
