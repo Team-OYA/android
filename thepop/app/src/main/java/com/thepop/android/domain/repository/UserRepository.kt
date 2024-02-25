@@ -1,8 +1,10 @@
 package com.thepop.android.domain.repository
 
-interface UserRepository {
-    suspend fun kakaoLogin(accessToken: String)
+import com.thepop.android.data.model.user.KakaoLoginResponse
 
-    suspend fun reissueToken(refreshToken: String)
+interface UserRepository {
+    suspend fun kakaoLogin(accessToken: String): KakaoLoginResponse
+
+    suspend fun reissueToken(refreshToken: String): KakaoLoginResponse
 
 }

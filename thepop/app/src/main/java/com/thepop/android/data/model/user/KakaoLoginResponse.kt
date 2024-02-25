@@ -1,13 +1,15 @@
 package com.thepop.android.data.model.user
 
+import com.google.gson.annotations.SerializedName
+
 data class KakaoLoginResponse(
-    val code: Int,
-    val message: String,
-    val data: Data
+    @SerializedName("code") val code: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("data") val data: Data
 ) {
     data class Data(
-        val grantType: String,
-        val accessToken: String,
-        val refreshToken: String
+        @SerializedName("grantType") val grantType: String,
+        @SerializedName("accessToken") val accessToken: String,
+        @SerializedName("refreshToken") val refreshToken: String,
     )
 }
