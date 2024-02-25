@@ -3,8 +3,9 @@ package com.thepop.android.di
 import android.content.Context
 import android.content.Intent
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.thepop.android.BuildConfig
-import com.thepop.android.data.source.LocalDataSourceImpl
+import com.thepop.android.data.source.LocalDataSource
 import com.thepop.android.ui.splash.SplashActivity
 import dagger.Module
 import dagger.Provides
@@ -19,24 +20,24 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RetrofitModule {
+object RetrofitModule {
 
     @Provides
     @Singleton
     fun provideAuthInterceptor(
         @ApplicationContext context: Context,
-        localDataSource: LocalDataSourceImpl
+        localDataSource: LocalDataSource
     ): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "Bearer ${localDataSource.getAccessToken()}")
+                .addHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsc21sZWU5OUBnbWFpbC5jb20iLCJpYXQiOjE3MDg3OTA0MjIsImV4cCI6MTcwODg3NjgyMiwic3ViIjoidGVzdDEyMzNAZ21haWwuY29tIiwiaWQiOjF9.9w6859ga40pxal-GLORzfUcI4qDRvXVeqqvyqz-_clY")
                 .build()
             val response = chain.proceed(request)
             if (response.code == 401) {
                 handel401Error(context, localDataSource)
             }
-            response // response 반환
+            response
         }
     }
 
@@ -45,7 +46,7 @@ class RetrofitModule {
     fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .build() // 반환값을 직접 지정하도록 수정
+            .build()
     }
 
     @Provides
@@ -58,10 +59,16 @@ class RetrofitModule {
             .build()
     }
 
-    private fun handel401Error(context: Context, localDataSource: LocalDataSourceImpl) {
+    private fun handel401Error(context: Context, localDataSource: LocalDataSource) {
         localDataSource.removeAccessToken()
+        localDataSource.setAccessToken(null)
         val intent = Intent(context, SplashActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         context.startActivity(intent)
     }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder().setLenient().create()
+
 }
