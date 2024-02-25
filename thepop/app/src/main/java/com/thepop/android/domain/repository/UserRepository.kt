@@ -5,5 +5,4 @@ interface UserRepository {
 
     suspend fun reissueToken(refreshToken: String)
 
-    suspend fun getPopups(sort: String, pageNo: Int, amount: Int)
 }

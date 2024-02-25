@@ -1,4 +1,4 @@
-package com.thepop.android.data.model.user
+package com.thepop.android.data.model.popup
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
