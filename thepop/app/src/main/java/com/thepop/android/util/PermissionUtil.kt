@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.MediaStore
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.thepop.android.ui.community.WriteActivity
@@ -34,10 +35,10 @@ class PermissionUtil {
             }
         }
 
-        fun openGallery(writeActivity: WriteActivity) {
+        fun openGallery(writeActivity: WriteActivity, setImageResult: ActivityResultLauncher<Intent>) {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             writeActivity.startActivityForResult(intent, READ_MEDIA_IMAGES)
-
+            setImageResult.launch(intent)
         }
     }
 }

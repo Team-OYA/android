@@ -49,7 +49,7 @@
 	<string name="community_write_content_text">게시글 내용</string>
 	<string name="community_write_category_text">카테고리</string>
 	<string name="community_write_vote_text">투표 (선택사항)</string>
-	<string name="community_write_image_text">게시글 이미지( 선택사항)</string>
+	<string name="community_write_image_text">게시글 이미지 (선택사항)</string>
 	<string name="community_write_button">등록하기</string>
 	<string name="community_write_title_hint">글 제목을 입력해주세요</string>
 	<string name="community_write_content_hint">게시글의 내용을 작성해주세요</string>
