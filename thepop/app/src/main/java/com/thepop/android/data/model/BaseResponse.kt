@@ -1,7 +1,7 @@
 package com.thepop.android.data.model
 
-data class BaseResponse<T> (
+data class BaseResponse (
     val code: Int,
     val message: String,
-    val data: T?
+    val data: Any
 )

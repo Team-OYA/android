@@ -1,7 +1,12 @@
 package com.thepop.android.di
 
+import com.thepop.android.data.repository.PopupRepositoryImpl
 import com.thepop.android.data.repository.UserRepositoryImpl
-import com.thepop.android.data.source.remote.UserDataSourceImpl
+import com.thepop.android.data.service.PopupService
+import com.thepop.android.data.service.UserService
+import com.thepop.android.data.source.remote.popup.PopupDataSourceImpl
+import com.thepop.android.data.source.remote.user.UserDataSourceImpl
+import com.thepop.android.domain.repository.PopupRepository
 import com.thepop.android.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -15,7 +20,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(userDataSourceImpl: UserDataSourceImpl): UserRepository =
-        UserRepositoryImpl(userDataSourceImpl)
+    fun provideUserRepository(userService: UserService): UserRepository =
+        UserRepositoryImpl(userService)
+
+    @Provides
+    @Singleton
+    fun providePopupRepository(popupService: PopupService): PopupRepository =
+        PopupRepositoryImpl(popupService)
 
 }
