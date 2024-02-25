@@ -1,5 +1,6 @@
 package com.thepop.android.di
 
+import com.thepop.android.data.service.CommunityService
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.data.service.UserService
 import dagger.Module
@@ -22,5 +23,10 @@ object ServiceModule {
     @Singleton
     fun providePopupService(retrofit: Retrofit): PopupService =
         retrofit.create(PopupService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCommunityService(retrofit: Retrofit): CommunityService =
+        retrofit.create(CommunityService::class.java)
 
 }

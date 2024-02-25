@@ -13,6 +13,7 @@ import com.kakao.sdk.user.UserApiClient
 import com.thepop.android.MainActivity
 import com.thepop.android.data.service.UserService
 import com.thepop.android.databinding.ActivitySplashBinding
+import com.thepop.android.domain.repository.CommunityRepository
 import com.thepop.android.domain.repository.PopupRepository
 import com.thepop.android.domain.repository.UserRepository
 import com.thepop.android.util.ThepopSharedPrefernce
@@ -26,8 +27,6 @@ class SplashActivity : AppCompatActivity() {
 
     @Inject lateinit var preference: ThepopSharedPrefernce
     @Inject lateinit var userRepository: UserRepository
-    @Inject lateinit var userService: UserService
-    @Inject lateinit var popupRepository: PopupRepository
     private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,15 +84,6 @@ class SplashActivity : AppCompatActivity() {
                                 Log.e("로그인", "error: $e")
                             }
                         }
-                        lifecycleScope.launch {
-                            try {
-                                val response2 = popupRepository.getPopupList("all", 0, 5)
-                                Log.e("팝업리스트", "response: $response2")
-                            } catch (e: Exception) {
-                                Log.e("팝업리스트", "error: $e")
-                            }
-                        }
-                        Log.e(TAG, "로그인 성공2")
                     }
                 }
             } else {

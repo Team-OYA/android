@@ -1,9 +1,12 @@
 package com.thepop.android.di
 
+import com.thepop.android.data.service.CommunityService
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.data.service.UserService
 import com.thepop.android.data.source.LocalDataSource
 import com.thepop.android.data.source.LocalDataSourceImpl
+import com.thepop.android.data.source.remote.community.CommunityDataSource
+import com.thepop.android.data.source.remote.community.CommunityDataSourceImpl
 import com.thepop.android.data.source.remote.popup.PopupDataSource
 import com.thepop.android.data.source.remote.popup.PopupDataSourceImpl
 import com.thepop.android.data.source.remote.user.UserDataSource
@@ -32,5 +35,10 @@ object DataSourceModule {
     @Singleton
     fun providePopupDataSource(service: PopupService): PopupDataSource =
         PopupDataSourceImpl(service)
+
+    @Provides
+    @Singleton
+    fun provideUserService(service: CommunityService): CommunityDataSource =
+        CommunityDataSourceImpl(service)
 
 }
