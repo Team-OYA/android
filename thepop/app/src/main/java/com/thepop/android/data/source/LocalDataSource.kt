@@ -1,7 +1,7 @@
 package com.thepop.android.data.source
 
 interface LocalDataSource {
-    fun setAccessToken(token: String)
+    fun setAccessToken(token: String?)
     fun getAccessToken(): String?
     fun setRefreshToken(token: String)
     fun getRefreshToken(): String?

@@ -1,5 +1,6 @@
 <resources>
 	<string name="app_name">THE POP</string>
+	<string name="kakao_app_key">b2e6f5e774e65b25fd08668ea0d39ff4</string>
 
 
 	<!-- Navigation bar -->

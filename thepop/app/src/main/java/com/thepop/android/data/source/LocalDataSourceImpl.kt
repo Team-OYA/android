@@ -1,13 +1,16 @@
 package com.thepop.android.data.source
 
+import com.thepop.android.data.local.AuthLocalPreferences
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
-    private val authLocalPreferences: LocalDataSource
+    private val authLocalPreferences: AuthLocalPreferences
 ) : LocalDataSource {
 
-        override fun setAccessToken(token: String) {
-            authLocalPreferences.setAccessToken(token)
+        override fun setAccessToken(token: String?) {
+            if (token != null) {
+                authLocalPreferences.setAccessToken(token)
+            }
         }
 
         override fun getAccessToken(): String? {
