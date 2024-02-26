@@ -1,5 +1,6 @@
 package com.thepop.android.ui.common
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +34,16 @@ class PopupRecommendAdapter (private val popupList: PopupListResponse.PopupList)
             binding.tvPopupStartDate.text = popup.openDate
             binding.tvPopupEndDate.text = popup.closeDate
             binding.tvPopupTag.text = popup.category.description
+
+            binding.root.setOnClickListener {
+                goToPopupDetail(popup.popupId)
+            }
+        }
+
+        private fun goToPopupDetail(popupId: Int) {
+            val intent = Intent(binding.root.context, PopupDetailActivity::class.java)
+            intent.putExtra("popupId", popupId)
+            binding.root.context.startActivity(intent)
         }
     }
 }

@@ -18,7 +18,6 @@ class HomeFragment : Fragment() {
 
 
     private lateinit var binding: FragmentHomeBinding
-    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

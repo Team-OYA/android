@@ -14,6 +14,7 @@ data class PopupListResponse(
 
         @Parcelize
         data class Popup(
+            @SerializedName("popupId") val popupId: Int,
             @SerializedName("planId") val planId: Int,
             @SerializedName("title") val title: String,
             @SerializedName("description") val description: String,

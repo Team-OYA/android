@@ -38,7 +38,7 @@ class HomeScheduledFragment : Fragment() {
         dataObserver()
     }
     private fun setPopupScheduledList() {
-        homeViewModel.setPopupNowList(currentPage, 5)
+        homeViewModel.setPopupScheduledList(currentPage, 5)
     }
 
     private fun dataObserver() {
