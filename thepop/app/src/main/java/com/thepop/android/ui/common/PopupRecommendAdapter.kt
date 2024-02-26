@@ -25,6 +25,7 @@ class PopupRecommendAdapter (private val popupList: PopupListResponse.PopupList)
     }
 
     class PopupViewHolder(private val binding: RvPopUpRecommendBinding): RecyclerView.ViewHolder(binding.root) {
+
         fun bind(popup: PopupListResponse.PopupList.Popup) {
             binding.tvPopupTitle.text = popup.title
             binding.tvPopupContent.text = popup.description

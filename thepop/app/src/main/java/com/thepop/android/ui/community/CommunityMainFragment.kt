@@ -56,7 +56,7 @@ class CommunityMainFragment : Fragment() {
 
     private fun setCommunityList(data: CommunityListResponse.CommunityDetailResponseList) {
         val recyclerViewList = binding.rvCommunityPost
-        val adapter = CommunityListAdapter(data)
+        val adapter = CommunityListAdapter(communityViewModel, data)
         recyclerViewList.layoutManager = GridLayoutManager(
             requireContext(), 1, GridLayoutManager.VERTICAL, false
         )

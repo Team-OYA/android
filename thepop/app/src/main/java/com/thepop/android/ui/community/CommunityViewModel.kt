@@ -35,9 +35,11 @@ class CommunityViewModel @Inject constructor(
     fun checkVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                communityService.checkVote(voteId)
+                val response = communityService.checkVote(voteId)
+                Log.e("checkVote", response.toString())
             } catch (e: Exception) {
                 e.printStackTrace()
+                Log.e("checkVote", e.toString())
             }
         }
     }
@@ -45,9 +47,11 @@ class CommunityViewModel @Inject constructor(
     fun cancelVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                communityService.cancelVote(voteId)
+                val response = communityService.cancelVote(voteId)
+                Log.e("cancelVote", response.toString())
             } catch (e: Exception) {
                 e.printStackTrace()
+                Log.e("cancelVote", e.toString())
             }
         }
     }

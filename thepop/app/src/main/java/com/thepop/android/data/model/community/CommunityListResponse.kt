@@ -26,7 +26,7 @@ data class CommunityListResponse(
             @SerializedName("createdDate") val createdDate: String,
             @SerializedName("modifiedDate") val modifiedDate: String,
             @SerializedName("countView") val countView: Int,
-            @SerializedName("voteResponseList") val voteResponseList: List<VoteResponse>?,
+            @SerializedName("voteResponseList") val voteResponseList: List<VoteResponse>,
             @SerializedName("imageList") val imageList: List<String>,
         ) {
             @Parcelize
