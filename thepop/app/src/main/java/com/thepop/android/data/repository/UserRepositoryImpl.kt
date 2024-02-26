@@ -6,7 +6,7 @@ import com.thepop.android.domain.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    private val userService: UserService
+    private val userService: UserService,
 ) : UserRepository {
 
 

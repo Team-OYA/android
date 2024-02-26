@@ -39,9 +39,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun init() {
         val accessToken = preference.getAccessToken()
-        if (accessToken != null) {
-//            goToMainActivity()
-            setLoginButton()
+        if (!accessToken.isNullOrEmpty()){
+            goToMainActivity()
         } else {
             setLoginButton()
         }
@@ -78,8 +77,8 @@ class SplashActivity : AppCompatActivity() {
                         lifecycleScope.launchWhenCreated {
                             try {
                                 val response = userRepository.kakaoLogin(token.accessToken)
-
-                                Log.e("로그인", "response: $response")
+                                preference.setAccessToken(response.data.accessToken)
+                                preference.setRefreshToken(response.data.refreshToken)
                             } catch (e: Exception) {
                                 Log.e("로그인", "error: $e")
                             }

@@ -7,13 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.thepop.android.R
+import com.thepop.android.data.model.popup.PopupListResponse
 import com.thepop.android.databinding.FragmentHomeMainBinding
+import com.thepop.android.ui.common.PopupRecommendAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeMainFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeMainBinding
+    private val homeViewModel by viewModels<HomeViewModel>()
     private val adImageList = arrayListOf<Int>()
     private val handler = Handler(Looper.getMainLooper())
     private var currentPage = 0
@@ -31,9 +37,15 @@ class HomeMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = homeViewModel
+
         viewPager = binding.vpAdImages
         setupViewPager()
         startAutoScroll()
+        getPopupRecommendList()
+        dataObserver()
     }
 
     private fun setupViewPager() {
@@ -92,6 +104,21 @@ class HomeMainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         handler.removeCallbacks(scrollRunnable)
+    }
+    
+    private fun getPopupRecommendList() {
+        homeViewModel.setPopupRecommendList()
+    }
+
+    private fun dataObserver() {
+        homeViewModel.popupRecommendList.observe(viewLifecycleOwner) {
+            setPopupRecommendList(it)
+        }
+    }
+
+    private fun setPopupRecommendList(popupList: PopupListResponse.PopupList) {
+        val adapter = PopupRecommendAdapter(popupList)
+        binding.rvHomeRecommend.adapter = adapter
     }
 }
 
