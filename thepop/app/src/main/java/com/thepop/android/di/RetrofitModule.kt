@@ -31,7 +31,7 @@ object RetrofitModule {
         return Interceptor { chain ->
             val request = chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsc21sZWU5OUBnbWFpbC5jb20iLCJpYXQiOjE3MDg3OTA0MjIsImV4cCI6MTcwODg3NjgyMiwic3ViIjoidGVzdDEyMzNAZ21haWwuY29tIiwiaWQiOjF9.9w6859ga40pxal-GLORzfUcI4qDRvXVeqqvyqz-_clY")
+                .addHeader("Authorization", "Bearer ${localDataSource.getAccessToken()}")
                 .build()
             val response = chain.proceed(request)
             if (response.code == 401) {

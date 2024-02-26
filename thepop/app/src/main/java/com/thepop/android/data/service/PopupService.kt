@@ -21,7 +21,7 @@ interface PopupService {
         @Path("popupId") popupId: Int
     ): PopupDetailResponse
 
-    @GET("popups/recommend")
+    @GET("popups/recommended")
     suspend fun getPopupRecommend(
         @Query("pageNo") pageNo: Int,
         @Query("amount") amount: Int
