@@ -15,7 +15,7 @@ class PopupDetailActivity: AppCompatActivity() {
     private lateinit var binding: ActivityPopupDetailBinding
     @Inject lateinit var popupService: PopupService
 
-    private var popupId: Int = 1
+    private var popupId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

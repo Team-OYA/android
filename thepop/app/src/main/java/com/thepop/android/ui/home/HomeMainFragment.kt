@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.thepop.android.R
 import com.thepop.android.data.model.popup.PopupListResponse
@@ -118,6 +119,8 @@ class HomeMainFragment : Fragment() {
 
     private fun setPopupRecommendList(popupList: PopupListResponse.PopupList) {
         val adapter = PopupRecommendAdapter(popupList)
+        binding.rvHomeRecommend.layoutManager = GridLayoutManager(
+            requireContext(), 1, GridLayoutManager.HORIZONTAL, false)
         binding.rvHomeRecommend.adapter = adapter
     }
 }

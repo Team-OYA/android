@@ -24,7 +24,20 @@ data class CommunityDetailResponse(
         @SerializedName("createdDate") val createdDate: String,
         @SerializedName("modifiedDate") val modifiedDate: String,
         @SerializedName("countView") val countView: Int,
-        @SerializedName("voteResponseList") val voteResponseList: Any?,
-        @SerializedName("imageList") val imageList: List<String>
+        @SerializedName("voteResponseList") val voteResponseList: List<VoteResponseList>,
+        @SerializedName("imageList") val imageList: List<String>,
+        @SerializedName("written") val written: Boolean,
+        @SerializedName("collected") val collected: Boolean,
     )
+
+    {
+        @Parcelize
+        data class VoteResponseList(
+            @SerializedName("vote_id") val vote_id: Int,
+            @SerializedName("content") val content: String,
+            @SerializedName("voteCreatedDate") val voteCreatedDate: String,
+            @SerializedName("voteSum") val voteSum: Int,
+            @SerializedName("checked") val checked: Boolean
+        )
+    }
 }

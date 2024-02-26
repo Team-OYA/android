@@ -44,9 +44,12 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
+        val client = OkHttpClient.Builder().addInterceptor(interceptor)
+        val loggingInterceptor = okhttp3.logging.HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(okhttp3.logging.HttpLoggingInterceptor.Level.BODY)
+        client.addInterceptor(loggingInterceptor)
+
+        return client.build()
     }
 
     @Provides
@@ -70,5 +73,6 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
+
 
 }

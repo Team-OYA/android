@@ -6,11 +6,9 @@ import kotlinx.android.parcel.Parcelize
 data class CommunityListResponse(
     @SerializedName("code") val code: Int?,
     @SerializedName("message") val message: String?,
-    @SerializedName("data") val data: CommunityDetailResponseData?
+    @SerializedName("data") val data: CommunityDetailResponseList
 ) {
-
-    @Parcelize
-    data class CommunityDetailResponseData(
+    data class CommunityDetailResponseList(
         @SerializedName("communityDetailResponseList") val communityDetailResponseList: List<CommunityDetail>
     ) {
         @Parcelize
@@ -29,7 +27,7 @@ data class CommunityListResponse(
             @SerializedName("modifiedDate") val modifiedDate: String,
             @SerializedName("countView") val countView: Int,
             @SerializedName("voteResponseList") val voteResponseList: List<VoteResponse>?,
-            @SerializedName("imageList") val imageList: List<String>
+            @SerializedName("imageList") val imageList: List<String>,
         ) {
             @Parcelize
             data class VoteResponse(
