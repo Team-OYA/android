@@ -17,12 +17,12 @@ class CommunityDataSourceImpl @Inject constructor(
     }
 
     override suspend fun createCommunityPostVote(
-        type: String, data: CommunityWriteVoteRequest, images: MultipartBody.Part): BaseResponse {
+        type: String, data: CommunityWriteVoteRequest, images: List<MultipartBody.Part>): BaseResponse {
         return communityService.createCommunityPostVote(type, data, images)
     }
 
     override suspend fun createCommunityPost(
-        type: String, data: CommunityWriteRequest, images: MultipartBody.Part): BaseResponse {
+        type: String, data: CommunityWriteRequest, images: List<MultipartBody.Part>): BaseResponse {
         return communityService.createCommunityPost(type, data, images)
     }
 

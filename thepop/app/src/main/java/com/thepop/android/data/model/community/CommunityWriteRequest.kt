@@ -1,10 +1,13 @@
 package com.thepop.android.data.model.community
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class CommunityWriteRequest(
     @SerializedName("data") val data: CommunityWriteData,
 ) {
+
+    @Parcelize
     data class CommunityWriteData(
         @SerializedName("title") val title: String,
         @SerializedName("description") val description: String,

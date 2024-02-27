@@ -83,8 +83,8 @@ class CommunityListAdapter(
 
         fun bind(communityPost: CommunityListResponse.CommunityDetailResponseList.CommunityDetail) {
             binding.tvPostContentsTitle.text = communityPost.title
-            if (communityPost.description.length > 100) {
-                binding.tvPostContentsContents.text = communityPost.description.substring(0, 100) + "..."
+            if (communityPost.description.length > 60) {
+                binding.tvPostContentsContents.text = communityPost.description.substring(0, 60) + "..."
             } else {
                 binding.tvPostContentsContents.text = communityPost.description
             }

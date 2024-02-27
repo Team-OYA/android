@@ -6,7 +6,6 @@ import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
 import com.thepop.android.data.model.community.CommunityWriteVoteRequest
 import okhttp3.MultipartBody
-import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
@@ -26,16 +25,16 @@ interface CommunityService {
     @POST("communities")
     suspend fun createCommunityPostVote(
         @Query("type") type: String = "vote",
-        @Body data: CommunityWriteVoteRequest,
-        @Part images: MultipartBody.Part?
+        @Part("data") data: CommunityWriteVoteRequest?,
+        @Part images: List<MultipartBody.Part>  // 여러 이미지를 보내는 데에는 List를 사용합니다.
     ): BaseResponse
 
     @Multipart
     @POST("communities")
     suspend fun createCommunityPost(
-        @Query("type") type: String = "basic",
-        @Body data: CommunityWriteRequest,
-        @Part images: MultipartBody.Part?
+        @Query("type") type: String = "post",
+        @Part("data") data: CommunityWriteRequest?,
+        @Part images: List<MultipartBody.Part>  // 여러 이미지를 보내는 데에는 List를 사용합니다.
     ): BaseResponse
 
     @POST("votes/{voteId}/check")
