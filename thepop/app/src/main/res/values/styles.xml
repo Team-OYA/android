@@ -9,4 +9,16 @@
         <item name="android:textSize">14dp</item>
     </style>
 
+    <style name="votedTrue">
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+    <style name="votedFalse">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/gray5</item>
+    </style>
+
 </resources>

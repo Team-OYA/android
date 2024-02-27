@@ -49,6 +49,8 @@ class CommunityListAdapter(
                         voteSum2--
                         binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
                         binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote)
+                        binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
+                        binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
                         setVotePercent(voteSum1, voteSum2)
                     }
                 }
@@ -61,12 +63,15 @@ class CommunityListAdapter(
                     if (!isVoteSecond) {
                         setVoteSystem(communityPost.voteResponseList[1].voteId, false)
                         setVoteSystem(communityPost.voteResponseList[0].voteId, true)
+
                         isVoteFirst = false
                         isVoteSecond = true
                         voteSum1--
                         voteSum2++
                         binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote)
                         binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                        binding.tvPostVote1.setTextAppearance(R.style.votedFalse)
+                        binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
                         setVotePercent(voteSum1, voteSum2)
                     }
                 }
@@ -113,9 +118,11 @@ class CommunityListAdapter(
                 }
                 if (isVoteFirst) {
                     binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                    binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
                 }
                 if (isVoteSecond) {
                     binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                    binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
                 }
             }
         }

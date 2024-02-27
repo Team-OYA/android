@@ -111,9 +111,11 @@ class CommunityDetailActivity : AppCompatActivity() {
                     }
                     if (isVoteFirst) {
                         binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                        binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
                     }
                     if (isVoteSecond) {
                         binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                        binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
                     }
 
                     binding.clPostVote2.setOnClickListener {
@@ -130,9 +132,13 @@ class CommunityDetailActivity : AppCompatActivity() {
                             isVoteFirst = true
                             isVoteSecond = false
                             voteSum1++
-                            voteSum2--
+                            if (voteSum2 != 0) {
+                                voteSum2--
+                            }
                             binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
                             binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote)
+                            binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
+                            binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
                             setVotePercent(voteSum1, voteSum2)
                         }
                     }
@@ -143,10 +149,14 @@ class CommunityDetailActivity : AppCompatActivity() {
                             setVoteSystem(postData.voteResponseList[0].vote_id, true)
                             isVoteFirst = false
                             isVoteSecond = true
-                            voteSum1--
+                            if (voteSum1 != 0) {
+                                voteSum1--
+                            }
                             voteSum2++
                             binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote)
                             binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                            binding.tvPostVote1.setTextAppearance(R.style.votedFalse)
+                            binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
                             setVotePercent(voteSum1, voteSum2)
                         }
                     }
