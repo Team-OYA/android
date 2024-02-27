@@ -1,5 +1,6 @@
 package com.thepop.android.data.repository
 
+import android.util.Log
 import com.thepop.android.data.model.BaseResponse
 import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
@@ -12,18 +13,25 @@ import javax.inject.Inject
 
 class CommunityRepositoryImpl @Inject constructor(
     private val communityService: CommunityService
-    ) : CommunityRepository {
+) : CommunityRepository {
+
     override suspend fun getCommunityDetail(postId: Int): CommunityDetailResponse {
         return communityService.getCommunityDetail(postId)
     }
 
     override suspend fun createCommunityPostVote(
-        type: String, data: CommunityWriteVoteRequest, images: MultipartBody.Part): BaseResponse {
+        type: String,
+        data: CommunityWriteVoteRequest,
+        images: List<MultipartBody.Part>
+    ): BaseResponse {
         return communityService.createCommunityPostVote(type, data, images)
     }
 
     override suspend fun createCommunityPost(
-        type: String, data: CommunityWriteRequest, images: MultipartBody.Part): BaseResponse {
+        type: String,
+        data: CommunityWriteRequest,
+        images: List<MultipartBody.Part>
+    ): BaseResponse {
         return communityService.createCommunityPost(type, data, images)
     }
 
@@ -46,5 +54,4 @@ class CommunityRepositoryImpl @Inject constructor(
     override suspend fun scrapCommunityPost(postId: Int): BaseResponse {
         return communityService.scrapCommunityPost(postId)
     }
-
 }

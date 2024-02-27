@@ -12,10 +12,10 @@ interface CommunityRepository {
     suspend fun getCommunityDetail(postId: Int): CommunityDetailResponse
 
     suspend fun createCommunityPostVote(
-        type: String, data: CommunityWriteVoteRequest, images: MultipartBody.Part): BaseResponse
+        type: String, data: CommunityWriteVoteRequest, images: List<MultipartBody.Part>): BaseResponse
 
     suspend fun createCommunityPost(
-        type: String, data: CommunityWriteRequest, images: MultipartBody.Part): BaseResponse
+        type: String, data: CommunityWriteRequest, images: List<MultipartBody.Part>): BaseResponse
 
     suspend fun checkVote(voteId: Int): BaseResponse
 

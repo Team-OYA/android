@@ -79,6 +79,7 @@ class SplashActivity : AppCompatActivity() {
                                 val response = userRepository.kakaoLogin(token.accessToken)
                                 preference.setAccessToken(response.data.accessToken)
                                 preference.setRefreshToken(response.data.refreshToken)
+                                goToMainActivity()
                             } catch (e: Exception) {
                                 Log.e("로그인", "error: $e")
                             }

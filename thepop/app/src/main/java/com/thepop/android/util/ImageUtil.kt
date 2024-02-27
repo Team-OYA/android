@@ -18,7 +18,7 @@ class ImageUtil {
         private fun saveBitmapToFile(bitmap: Bitmap, file: File) {
             try {
                 val fos = FileOutputStream(file)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, fos)
                 fos.flush()
                 fos.close()
             } catch (e: Exception) {

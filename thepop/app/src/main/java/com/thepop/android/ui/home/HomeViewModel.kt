@@ -60,18 +60,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
-    private val _popupDetail: MutableLiveData<PopupDetailResponse.PopupDetailData> = MutableLiveData()
-    val popupDetail: LiveData<PopupDetailResponse.PopupDetailData> = _popupDetail
-
-    fun setPopupDetail(popupId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = popupService.getPopupDetail(popupId)
-                _popupDetail.postValue(response.data)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 }
