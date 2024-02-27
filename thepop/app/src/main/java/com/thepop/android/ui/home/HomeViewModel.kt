@@ -1,6 +1,5 @@
 package com.thepop.android.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.thepop.android.data.model.popup.PopupDetailResponse
 import com.thepop.android.data.model.popup.PopupListResponse
 import com.thepop.android.data.service.PopupService
-import com.thepop.android.domain.repository.PopupRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,6 +53,20 @@ class HomeViewModel @Inject constructor(
             try {
                 val response = popupService.getPopupList("scheduled", pageNo, amount)
                 _popupScheduledList.postValue(response.data)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private val _popupDetail: MutableLiveData<PopupDetailResponse.PopupDetailData> = MutableLiveData()
+    val popupDetail: LiveData<PopupDetailResponse.PopupDetailData> = _popupDetail
+
+    fun setPopupDetail(popupId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = popupService.getPopupDetail(popupId)
+                _popupDetail.postValue(response.data)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
