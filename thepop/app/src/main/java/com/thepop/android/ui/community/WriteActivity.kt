@@ -188,7 +188,12 @@ class WriteActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = communityService.getCategoryList()
-                categoryList = response.data.categories.drop(1)
+                if (response.data.categories[0].description != "전체 보기") {
+                    categoryList = response.data.categories.drop(1)
+                } else {
+                    categoryList = response.data.categories
+                }
+
                 setCategorySpinner()
             } catch (e: Exception) {
                 Log.e("WriteActivity", e.toString())

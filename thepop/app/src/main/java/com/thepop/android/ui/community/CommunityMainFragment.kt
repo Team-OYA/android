@@ -21,6 +21,7 @@ class CommunityMainFragment : Fragment() {
 
     private lateinit var binding: FragmentCommunityMainBinding
     private val communityViewModel by viewModels<CommunityViewModel>()
+    private var pageNo = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,15 +79,12 @@ class CommunityMainFragment : Fragment() {
             if (checked) {
                 when (view.id) {
                     R.id.rb_community_all -> {
-                        Log.e("CommunityMainFragment", "onRadioButtonClicked: all")
                         communityViewModel.getCommunityPostList("all", 0, 10)
                     }
                     R.id.rb_community_ad -> {
-                        Log.e("CommunityMainFragment", "onRadioButtonClicked: ad")
                         communityViewModel.getCommunityPostList("business", 0, 10)
                     }
                     R.id.rb_community_user -> {
-                        Log.e("CommunityMainFragment", "onRadioButtonClicked: user")
                         communityViewModel.getCommunityPostList("user", 0, 10)
                     }
                 }
