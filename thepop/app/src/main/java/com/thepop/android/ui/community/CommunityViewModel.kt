@@ -32,6 +32,26 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
+    fun getPaginationCommunityPostList(type: String, pageNo: Int, amount: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.getCommunityList(type, pageNo, amount)
+                if (response.data.communityDetailResponseList.isEmpty()) {
+                    Log.e("getPaginationCommunityPostList", "데이터가 없습니다.")
+                } else {
+                    // 기존 목록에 새 페이지의 데이터를 추가합니다.
+                    val currentList = _communityPostList.value?.communityDetailResponseList?.toMutableList()
+                        ?: mutableListOf()
+                    currentList.addAll(response.data.communityDetailResponseList)
+                    _communityPostList.postValue(CommunityListResponse.CommunityDetailResponseList(currentList))
+                }
+            } catch (e: Exception) {
+                Log.e("getPaginationCommunityPostList", e.toString())
+            }
+        }
+    }
+
+
 
 
     fun checkVote(voteId: Int) {
