@@ -2,6 +2,7 @@ package com.thepop.android.data.repository
 
 import android.util.Log
 import com.thepop.android.data.model.BaseResponse
+import com.thepop.android.data.model.community.CategoryResponse
 import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
@@ -54,4 +55,9 @@ class CommunityRepositoryImpl @Inject constructor(
     override suspend fun scrapCommunityPost(postId: Int): BaseResponse {
         return communityService.scrapCommunityPost(postId)
     }
+
+    override suspend fun getCategoryList(): CategoryResponse {
+        return communityService.getCategoryList()
+    }
+
 }

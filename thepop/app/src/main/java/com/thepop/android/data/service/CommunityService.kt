@@ -1,6 +1,7 @@
 package com.thepop.android.data.service
 
 import com.thepop.android.data.model.BaseResponse
+import com.thepop.android.data.model.community.CategoryResponse
 import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
@@ -63,5 +64,8 @@ interface CommunityService {
     suspend fun scrapCommunityPost(
         @Path("postId") postId: Int
     ): BaseResponse
+
+    @GET("plans/categories")
+    suspend fun getCategoryList(): CategoryResponse
 
 }

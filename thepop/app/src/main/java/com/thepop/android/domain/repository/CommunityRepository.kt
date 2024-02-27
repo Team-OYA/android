@@ -1,6 +1,7 @@
 package com.thepop.android.domain.repository
 
 import com.thepop.android.data.model.BaseResponse
+import com.thepop.android.data.model.community.CategoryResponse
 import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
@@ -12,10 +13,12 @@ interface CommunityRepository {
     suspend fun getCommunityDetail(postId: Int): CommunityDetailResponse
 
     suspend fun createCommunityPostVote(
-        type: String, data: CommunityWriteVoteRequest, images: List<MultipartBody.Part>): BaseResponse
+        type: String, data: CommunityWriteVoteRequest, images: List<MultipartBody.Part>
+    ): BaseResponse
 
     suspend fun createCommunityPost(
-        type: String, data: CommunityWriteRequest, images: List<MultipartBody.Part>): BaseResponse
+        type: String, data: CommunityWriteRequest, images: List<MultipartBody.Part>
+    ): BaseResponse
 
     suspend fun checkVote(voteId: Int): BaseResponse
 
@@ -26,5 +29,7 @@ interface CommunityRepository {
     suspend fun getCommunityList(type: String, pageNo: Int, amount: Int): CommunityListResponse
 
     suspend fun scrapCommunityPost(postId: Int): BaseResponse
+
+    suspend fun getCategoryList(): CategoryResponse
 
 }

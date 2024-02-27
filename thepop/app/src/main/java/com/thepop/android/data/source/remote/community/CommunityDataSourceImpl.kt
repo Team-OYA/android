@@ -1,6 +1,7 @@
 package com.thepop.android.data.source.remote.community
 
 import com.thepop.android.data.model.BaseResponse
+import com.thepop.android.data.model.community.CategoryResponse
 import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
@@ -44,6 +45,10 @@ class CommunityDataSourceImpl @Inject constructor(
 
     override suspend fun scrapCommunityPost(postId: Int): BaseResponse {
         return communityService.scrapCommunityPost(postId)
+    }
+
+    override suspend fun getCategoryList(): CategoryResponse {
+        return communityService.getCategoryList()
     }
 
 }

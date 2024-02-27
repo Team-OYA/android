@@ -33,6 +33,7 @@ class CommunityViewModel @Inject constructor(
     }
 
 
+
     fun checkVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -94,4 +95,17 @@ class CommunityViewModel @Inject constructor(
             }
         }
     }
+
+    fun getCategoryList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.getCategoryList()
+                Log.e("getCategoryList", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("getCategoryList", e.toString())
+            }
+        }
+    }
+
 }
