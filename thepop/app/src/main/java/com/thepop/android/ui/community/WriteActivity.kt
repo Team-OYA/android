@@ -5,12 +5,16 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thepop.android.R
+import com.thepop.android.data.model.community.CategoryResponse
 import com.thepop.android.data.model.community.CommunityWriteRequest
 import com.thepop.android.data.model.community.CommunityWriteVoteRequest
 import com.thepop.android.data.service.CommunityService
@@ -34,6 +38,8 @@ class WriteActivity : AppCompatActivity() {
     @Inject lateinit var communityService: CommunityService
     private var writeVoteData: CommunityVoteWriteData? = null
     private var writeData: CommunityWriteData? = null
+    private lateinit var categoryList: List<CategoryResponse.CategoryList.CategoryData>
+    private var categoryCode: String = "CG000001"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,7 @@ class WriteActivity : AppCompatActivity() {
         goBack()
         setAddImageAdapter()
         setCompleteButton()
+        getCategoryList()
     }
 
     private fun goBack() {
@@ -59,7 +66,7 @@ class WriteActivity : AppCompatActivity() {
                     writeVoteData?.apply {
                         title = binding.editTitle.text.toString()
                         description = binding.editContent.text.toString()
-                        categoryCode = "CG000005"
+                        categoryCode = categoryCode
                         votes.add(binding.etPostVote1.text.toString())
                         votes.add(binding.etPostVote2.text.toString())
                     }
@@ -81,7 +88,7 @@ class WriteActivity : AppCompatActivity() {
                     writeData = CommunityWriteData(
                         title = binding.editTitle.text.toString(),
                         description = binding.editContent.text.toString(),
-                        categoryCode = "CG000005"
+                        categoryCode = categoryCode
                     )
 
                     val postDTO = CommunityWriteRequest(
@@ -173,6 +180,38 @@ class WriteActivity : AppCompatActivity() {
                 finish()
             } catch (e: Exception) {
                 Log.e("WriteActivity", e.toString())
+            }
+        }
+    }
+
+    private fun getCategoryList() {
+        lifecycleScope.launch {
+            try {
+                val response = communityService.getCategoryList()
+                if (response.data.categories[0].description != "전체 보기") {
+                    categoryList = response.data.categories.drop(1)
+                } else {
+                    categoryList = response.data.categories
+                }
+
+                setCategorySpinner()
+            } catch (e: Exception) {
+                Log.e("WriteActivity", e.toString())
+            }
+        }
+    }
+
+    private fun setCategorySpinner() {
+        val categoryAdapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_dropdown_item, categoryList.map { it.description }
+        )
+        binding.spinnerCategory.adapter = categoryAdapter
+        binding.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                categoryCode = categoryList[position].code
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
     }

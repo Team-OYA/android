@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thepop.android.data.model.community.CommunityDetailResponse
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.service.CommunityService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,7 @@ class CommunityViewModel @Inject constructor(
     }
 
 
+
     fun checkVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -55,4 +57,55 @@ class CommunityViewModel @Inject constructor(
             }
         }
     }
+
+    private val _communityDetail: MutableLiveData<CommunityDetailResponse.CommunityDetailData> = MutableLiveData()
+    val communityDetail: LiveData<CommunityDetailResponse.CommunityDetailData> = _communityDetail
+
+    fun getCommunityDetail(postId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.getCommunityDetail(postId)
+                _communityDetail.postValue(response.data)
+            } catch (e: Exception) {
+                Log.e("getCommunityDetail", e.toString())
+            }
+        }
+    }
+
+    fun deleteCommunityPost(postId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.deleteCommunityPost(postId)
+                Log.e("deleteCommunityPost", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("deleteCommunityPost", e.toString())
+            }
+        }
+    }
+
+    fun scrapCommunityPost(postId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.scrapCommunityPost(postId)
+                Log.e("scrapCommunityPost", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("scrapCommunityPost", e.toString())
+            }
+        }
+    }
+
+    fun getCategoryList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = communityService.getCategoryList()
+                Log.e("getCategoryList", response.toString())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("getCategoryList", e.toString())
+            }
+        }
+    }
+
 }

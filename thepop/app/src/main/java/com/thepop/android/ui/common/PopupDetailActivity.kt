@@ -1,10 +1,13 @@
 package com.thepop.android.ui.common
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.databinding.ActivityPopupDetailBinding
+import com.thepop.android.ui.community.CommunityViewModel
+import com.thepop.android.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,6 +17,7 @@ class PopupDetailActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityPopupDetailBinding
     @Inject lateinit var popupService: PopupService
+    private val viewModel: HomeViewModel by viewModels()
 
     private var popupId: Int = 0
 
@@ -25,26 +29,29 @@ class PopupDetailActivity: AppCompatActivity() {
         popupId = intent.getIntExtra("popupId", 1)
 
         init()
-        getPopupDetail(popupId)
+        getPopupDetail()
     }
 
-    private fun getPopupDetail(popupId: Int) {
-        lifecycleScope.launch {
-            try {
-                val response = popupService.getPopupDetail(popupId)
-                binding.tvPopupTitle.text = response.data.title
-                binding.tvPopupContent.text = response.data.description
-                binding.tvPopupDate.text = response.data.pulledDate
-            } catch (e: Exception) {
-                e.printStackTrace()
+    private fun setPopupDetail(popupId: Int) {
+        viewModel.setPopupDetail(popupId)
+    }
+
+    private fun getPopupDetail() {
+        viewModel.popupDetail.observe(this) {
+            lifecycleScope.launch {
+                binding.tvPopupTitle.text = it.title
+                binding.tvPopupContent.text = it.description
+                binding.tvPopupDate.text = it.pulledDate
             }
         }
     }
+
 
     private fun init() {
         binding.ivBack.setOnClickListener {
             finish()
         }
+        setPopupDetail(popupId)
     }
 
 }
