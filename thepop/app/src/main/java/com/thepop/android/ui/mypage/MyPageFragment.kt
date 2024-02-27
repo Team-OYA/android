@@ -9,14 +9,15 @@ import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
 import com.thepop.android.R
 import com.thepop.android.databinding.FragmentMyPageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : Fragment() {
 
     companion object {
         fun newInstance() = MyPageFragment()
     }
 
-    private lateinit var viewModel: MyPageViewModel
     private lateinit var binding: FragmentMyPageBinding
 
     override fun onCreateView(
@@ -32,11 +33,6 @@ class MyPageFragment : Fragment() {
         setTabs()
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MyPageViewModel::class.java]
-    }
 
     private fun setTabs() {
         binding.vpMypage.adapter = MypagePagerAdapter(requireActivity())
