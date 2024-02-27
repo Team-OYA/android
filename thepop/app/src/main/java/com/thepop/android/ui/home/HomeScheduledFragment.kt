@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.thepop.android.data.model.popup.PopupListResponse
 import com.thepop.android.databinding.FragmentHomeScheduledBinding
 import com.thepop.android.ui.common.PopupAdapter
@@ -17,11 +18,8 @@ class HomeScheduledFragment : Fragment() {
     private lateinit var binding: FragmentHomeScheduledBinding
     private val homeViewModel by viewModels<HomeViewModel>()
     private var currentPage = 0
+    private val type = "scheduled"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +34,14 @@ class HomeScheduledFragment : Fragment() {
 
         setPopupScheduledList()
         dataObserver()
+        scrollPopupScheduledList()
     }
     private fun setPopupScheduledList() {
-        homeViewModel.setPopupScheduledList(currentPage, 5)
+        homeViewModel.setPopupList(type, currentPage, 5)
     }
 
     private fun dataObserver() {
-        homeViewModel.popupScheduledList.observe(viewLifecycleOwner) {
+        homeViewModel.popupList.observe(viewLifecycleOwner) {
             setPopupScheduledList(it)
         }
     }
@@ -50,5 +49,16 @@ class HomeScheduledFragment : Fragment() {
     private fun setPopupScheduledList(popupList: PopupListResponse.PopupList) {
         val adapter = PopupAdapter(popupList)
         binding.rvHomeScheduled.adapter = adapter
+    }
+
+    private fun scrollPopupScheduledList() {
+        binding.rvHomeScheduled.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    currentPage += 1
+                    homeViewModel.setPaginationPopupList(type, currentPage, 5)
+                }
+            }
+        })
     }
 }

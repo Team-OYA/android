@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thepop.android.R
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.databinding.FragmentCommunityMainBinding
@@ -22,6 +23,7 @@ class CommunityMainFragment : Fragment() {
     private lateinit var binding: FragmentCommunityMainBinding
     private val communityViewModel by viewModels<CommunityViewModel>()
     private var pageNo = 0
+    private var type = "all"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,6 +73,7 @@ class CommunityMainFragment : Fragment() {
         goWrite()
         getCommunityList()
         dataObserver()
+        scrollListener()
     }
 
     private fun onRadioButtonClicked(view: View) {
@@ -79,17 +82,33 @@ class CommunityMainFragment : Fragment() {
             if (checked) {
                 when (view.id) {
                     R.id.rb_community_all -> {
-                        communityViewModel.getCommunityPostList("all", 0, 10)
+                        pageNo = 0
+                        type = "all"
+                        communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_ad -> {
-                        communityViewModel.getCommunityPostList("business", 0, 10)
+                        pageNo = 0
+                        type = "business"
+                        communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_user -> {
-                        communityViewModel.getCommunityPostList("user", 0, 10)
+                        pageNo = 0
+                        type = "user"
+                        communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                 }
             }
         }
+    }
+    private fun scrollListener() {
+        binding.rvCommunityPost.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    pageNo += 1
+                    communityViewModel.getPaginationCommunityPostList(type, pageNo, 10)
+                }
+            }
+        })
     }
 
     override fun onResume() {

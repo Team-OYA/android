@@ -26,7 +26,7 @@ class HomeMainFragment : Fragment() {
     private var currentPage = 0
     private var currentState = 0
     private lateinit var viewPager: ViewPager2
-    private var timer: Long = 10000 // 타이머 초기값
+    private var timer: Long = 10000
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
