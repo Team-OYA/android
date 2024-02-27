@@ -1,5 +1,6 @@
 package com.thepop.android.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,29 +31,31 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private val _popupNowList: MutableLiveData<PopupListResponse.PopupList> = MutableLiveData()
-    val popupNowList: LiveData<PopupListResponse.PopupList> = _popupNowList
+    private val _popupList: MutableLiveData<PopupListResponse.PopupList> = MutableLiveData()
+    val popupList: LiveData<PopupListResponse.PopupList> = _popupList
 
-    fun setPopupNowList(pageNo: Int, amount: Int) {
+    fun setPopupList(type: String, pageNo: Int, amount: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = popupService.getPopupList("progress", pageNo, amount)
-                _popupNowList.postValue(response.data)
+                val response = popupService.getPopupList(type, pageNo, amount)
+                _popupList.postValue(response.data)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-
-    private val _popupScheduledList: MutableLiveData<PopupListResponse.PopupList> = MutableLiveData()
-    val popupScheduledList: LiveData<PopupListResponse.PopupList> = _popupScheduledList
-
-    fun setPopupScheduledList(pageNo: Int, amount: Int) {
+    fun setPaginationPopupList(type: String, pageNo: Int, amount: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = popupService.getPopupList("scheduled", pageNo, amount)
-                _popupScheduledList.postValue(response.data)
+                val response = popupService.getPopupList(type, pageNo, amount)
+                if (response.data.popups.isEmpty()) {
+                    Log.e("setPaginationPopupList", "데이터가 없습니다.")
+                } else {
+                    val currentList = _popupList.value?.popups?.toMutableList() ?: mutableListOf()
+                    currentList.addAll(response.data.popups)
+                    _popupList.postValue(PopupListResponse.PopupList(currentList))
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
