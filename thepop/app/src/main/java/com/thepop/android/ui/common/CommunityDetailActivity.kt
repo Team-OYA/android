@@ -81,88 +81,91 @@ class CommunityDetailActivity : AppCompatActivity() {
 
     private fun setCommunityDetail() {
         viewModel.communityDetail.observe(this) { response ->
-            binding.tvPostTitle.text = response.title
-            binding.tvPostContent.text = response.description
-            binding.tvPostInfoUserName.text = response.nickname
-            isScraped = response.collected
-            postImages = response.imageList
-            setupViewPager()
-            if (response.userType != "BUSINESS") {
-                binding.ivPostBadge.visibility = android.view.View.GONE
-            }
-            if (response.collected) {
-                binding.btnStar.setImageResource(R.drawable.vi_star_true)
-            }
-            if (response.written) {
-                binding.btnMore.visibility = android.view.View.VISIBLE
-            }
-            if ((response.voteResponseList.size ?: 0) >= 2) {
-                binding.clPostVote.visibility = android.view.View.VISIBLE
-                binding.tvPostVote1.text = response.voteResponseList[0].content
-                binding.tvPostVote2.text = response.voteResponseList[1].content
-                isVoteFirst = response.voteResponseList[0].checked
-                isVoteSecond = response.voteResponseList[1].checked
-                voteSum1 = response.voteResponseList[0].voteSum
-                voteSum2 = response.voteResponseList[1].voteSum
-                if (isVoteFirst or isVoteSecond) {
-                    setVotePercent(voteSum1, voteSum2)
+            response?.let {
+                binding.tvPostTitle.text = it.title
+                binding.tvPostContent.text = it.description
+                binding.tvPostInfoUserName.text = it.nickname
+                isScraped = it.collected
+                postImages = it.imageList
+                setupViewPager()
+                if (it.userType != "BUSINESS") {
+                    binding.ivPostBadge.visibility = android.view.View.GONE
                 }
-                if (isVoteFirst) {
-                    binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
-                    binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
+                if (it.collected) {
+                    binding.btnStar.setImageResource(R.drawable.vi_star_true)
                 }
-                if (isVoteSecond) {
-                    binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
-                    binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
+                if (it.written) {
+                    binding.btnMore.visibility = android.view.View.VISIBLE
                 }
-
-                binding.clPostVote2.setOnClickListener {
-                    if (!response.voteResponseList[1].checked) {
-                        setVoteSystem(response.voteResponseList[1].vote_id, false)
-                        setVoteSystem(response.voteResponseList[0].vote_id, true)
-                    }
-                }
-
-                binding.clPostVote1.setOnClickListener {
-                    if (!isVoteFirst) {
-                        setVoteSystem(response.voteResponseList[0].vote_id , false)
-                        setVoteSystem(response.voteResponseList[1].vote_id, true)
-                        isVoteFirst = true
-                        isVoteSecond = false
-                        voteSum1++
-                        if (voteSum2 != 0) {
-                            voteSum2--
+                it.voteResponseList?.let { voteResponseList ->
+                    if (voteResponseList.size >= 2) {
+                        binding.clPostVote.visibility = android.view.View.VISIBLE
+                        binding.tvPostVote1.text = voteResponseList[0].content
+                        binding.tvPostVote2.text = voteResponseList[1].content
+                        isVoteFirst = voteResponseList[0].checked
+                        isVoteSecond = voteResponseList[1].checked
+                        voteSum1 = voteResponseList[0].voteSum
+                        voteSum2 = voteResponseList[1].voteSum
+                        if (isVoteFirst or isVoteSecond) {
+                            setVotePercent(voteSum1, voteSum2)
                         }
-                        binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
-                        binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote)
-                        binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
-                        binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
-                        setVotePercent(voteSum1, voteSum2)
-                    }
-                }
-
-                binding.clPostVote2.setOnClickListener {
-                    if (!isVoteSecond) {
-                        setVoteSystem(response.voteResponseList[1].vote_id, false)
-                        setVoteSystem(response.voteResponseList[0].vote_id, true)
-                        isVoteFirst = false
-                        isVoteSecond = true
-                        if (voteSum1 != 0) {
-                            voteSum1--
+                        if (isVoteFirst) {
+                            binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                            binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
                         }
-                        voteSum2++
-                        binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote)
-                        binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
-                        binding.tvPostVote1.setTextAppearance(R.style.votedFalse)
-                        binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
-                        setVotePercent(voteSum1, voteSum2)
+                        if (isVoteSecond) {
+                            binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                            binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
+                        }
+
+                        binding.clPostVote2.setOnClickListener {
+                            if (!voteResponseList[1].checked) {
+                                setVoteSystem(voteResponseList[1].vote_id, false)
+                                setVoteSystem(voteResponseList[0].vote_id, true)
+                            }
+                        }
+
+                        binding.clPostVote1.setOnClickListener {
+                            if (!isVoteFirst) {
+                                setVoteSystem(voteResponseList[0].vote_id , false)
+                                setVoteSystem(voteResponseList[1].vote_id, true)
+                                isVoteFirst = true
+                                isVoteSecond = false
+                                voteSum1++
+                                if (voteSum2 != 0) {
+                                    voteSum2--
+                                }
+                                binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                                binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote)
+                                binding.tvPostVote1.setTextAppearance(R.style.votedTrue)
+                                binding.tvPostVote2.setTextAppearance(R.style.votedFalse)
+                                setVotePercent(voteSum1, voteSum2)
+                            }
+                        }
+
+                        binding.clPostVote2.setOnClickListener {
+                            if (!isVoteSecond) {
+                                setVoteSystem(voteResponseList[1].vote_id, false)
+                                setVoteSystem(voteResponseList[0].vote_id, true)
+                                isVoteFirst = false
+                                isVoteSecond = true
+                                if (voteSum1 != 0) {
+                                    voteSum1--
+                                }
+                                voteSum2++
+                                binding.clPostVote1.background = binding.root.context.getDrawable(R.drawable.bg_vote)
+                                binding.clPostVote2.background = binding.root.context.getDrawable(R.drawable.bg_vote_true)
+                                binding.tvPostVote1.setTextAppearance(R.style.votedFalse)
+                                binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
+                                setVotePercent(voteSum1, voteSum2)
+                            }
+                        }
                     }
                 }
             }
-        } ?: run {
-            Toast.makeText(this, "데이터를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun deleteCommunityPost(postId: Int) {
         viewModel.deleteCommunityPost(postId)
