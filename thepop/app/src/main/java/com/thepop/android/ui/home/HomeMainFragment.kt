@@ -54,6 +54,11 @@ class HomeMainFragment : Fragment() {
         dataObserver()
     }
 
+    private fun init() {
+        getCommunityRecommendList()
+        getPopupRecommendList()
+    }
+
     private fun setupViewPager() {
         setAdImageList()
         val adImageAdapter = HomeMainPagerAdapter(adImageList)
@@ -142,6 +147,11 @@ class HomeMainFragment : Fragment() {
         binding.rvHomeCommunity.layoutManager = GridLayoutManager(
             requireContext(), 1, GridLayoutManager.VERTICAL, false)
         binding.rvHomeCommunity.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
     }
 
 

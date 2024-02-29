@@ -48,7 +48,9 @@ class CommunityListAdapter(
                             isVoteFirst = true
                             isVoteSecond = false
                             voteSum1++
-                            voteSum2--
+                            if (voteSum2 != 0) {
+                                voteSum2--
+                            }
                             binding.clPostVote1.background =
                                 binding.root.context.getDrawable(R.drawable.bg_vote_true)
                             binding.clPostVote2.background =
@@ -70,7 +72,9 @@ class CommunityListAdapter(
 
                             isVoteFirst = false
                             isVoteSecond = true
-                            voteSum1--
+                            if (voteSum1 != 0) {
+                                voteSum1--
+                            }
                             voteSum2++
                             binding.clPostVote1.background =
                                 binding.root.context.getDrawable(R.drawable.bg_vote)
