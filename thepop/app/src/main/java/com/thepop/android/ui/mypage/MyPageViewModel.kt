@@ -41,7 +41,7 @@ class MyPageViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = popupService.getPopupList(type, pageNo, amount)
-                Log.e("getCollectionPopupList", response.toString())
+                _popupList.postValue(response.data)
             } catch (e: Exception) {
                 Log.e("getCollectionPopupList", e.toString())
             }

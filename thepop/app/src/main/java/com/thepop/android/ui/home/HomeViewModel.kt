@@ -75,4 +75,20 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun scrapPopup(popupId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = popupService.scrapPopup(popupId)
+                Log.e("scrapPopup", response.toString())
+            } catch (e: Exception) {
+                Log.e("scrapPopup", e.toString())
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private val _popupCollectionList: MutableLiveData<PopupListResponse.PopupList> = MutableLiveData()
+    val popupCollection: LiveData<PopupListResponse.PopupList> = _popupCollectionList
+
 }

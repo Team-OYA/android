@@ -1,11 +1,13 @@
 package com.thepop.android.ui.mypage
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.thepop.android.R
 import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.popup.PopupListResponse
@@ -46,6 +48,7 @@ class MypagePopupFragment : Fragment() {
     private fun dataObserver() {
         mypageViewModel.popupList.observe(viewLifecycleOwner) {
             setPopupList(it)
+            Log.e("hihi", it.toString())
         }
     }
 
@@ -56,7 +59,13 @@ class MypagePopupFragment : Fragment() {
     private fun setPopupList(data: PopupListResponse.PopupList) {
         val recyclerViewList = binding.rvMypagePopup
         val adapter = PopupAdapter(data)
+
         recyclerViewList.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getMypagePopup()
     }
 
 }

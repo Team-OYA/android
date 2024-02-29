@@ -19,5 +19,6 @@ data class PopupDetailResponse(
         @SerializedName("category") val category: PopupListResponse.PopupList.Popup.Category,
         @SerializedName("openDate") val openDate: String,
         @SerializedName("closeDate") val closeDate: String,
+        @SerializedName("collected") val collected: Boolean
     )
 }

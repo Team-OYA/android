@@ -1,9 +1,11 @@
 package com.thepop.android.ui.common
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.thepop.android.R
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.databinding.ActivityPopupDetailBinding
 import com.thepop.android.ui.community.CommunityViewModel
@@ -18,8 +20,8 @@ class PopupDetailActivity: AppCompatActivity() {
     private lateinit var binding: ActivityPopupDetailBinding
     @Inject lateinit var popupService: PopupService
     private val viewModel: HomeViewModel by viewModels()
-
     private var popupId: Int = 0
+    private var isScraped: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +30,9 @@ class PopupDetailActivity: AppCompatActivity() {
         setContentView(binding.root)
         popupId = intent.getIntExtra("popupId", 1)
 
-        init()
+
         getPopupDetail()
+        init()
     }
 
     private fun setPopupDetail(popupId: Int) {
@@ -42,7 +45,16 @@ class PopupDetailActivity: AppCompatActivity() {
                 binding.tvPopupTitle.text = it.title
                 binding.tvPopupContent.text = it.description
                 binding.tvPopupDate.text = it.pulledDate
+                isScraped = it.collected
+                if (isScraped) {
+                    binding.btnBookmark.setImageResource(R.drawable.vi_bookmark_true)
+                    isScraped = false
+                } else {
+                    binding.btnBookmark.setImageResource(R.drawable.vi_bookmark_false)
+                    isScraped = true
+                }
             }
+            Log.e("getPopupDetail", it.toString())
         }
     }
 
@@ -52,6 +64,31 @@ class PopupDetailActivity: AppCompatActivity() {
             finish()
         }
         setPopupDetail(popupId)
+        setScrapButton()
+    }
+
+    private fun scrapPopup(popupId: Int) {
+        viewModel.scrapPopup(popupId)
+    }
+    private fun setScrapButton() {
+        if (isScraped) {
+            binding.btnBookmark.setImageResource(R.drawable.vi_bookmark_true)
+        }
+        binding.btnBookmark.setOnClickListener {
+            if (isScraped) {
+                binding.btnBookmark.setImageResource(R.drawable.vi_bookmark_true)
+                isScraped = false
+            } else {
+                binding.btnBookmark.setImageResource(R.drawable.vi_bookmark_false)
+                isScraped = true
+            }
+            scrapPopup(popupId)
+        }
+    }
+
+    override fun onStop() {
+        finish()
+        super.onStop()
     }
 
 }
