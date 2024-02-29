@@ -34,7 +34,7 @@ class WriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteBinding
     private var addImageList: ArrayList<Uri> = ArrayList()
-    private var boardImages: ArrayList<MultipartBody.Part> = ArrayList()
+    private var boardImages: List<MultipartBody.Part> = emptyList()
     @Inject lateinit var communityService: CommunityService
     private var writeVoteData: CommunityVoteWriteData? = null
     private var writeData: CommunityWriteData? = null
@@ -138,7 +138,9 @@ class WriteActivity : AppCompatActivity() {
                         try {
                             val boardImage = ImageUtil.createImagePartFromUri(this@WriteActivity, imageUri)
                             boardImage?.let {
-                                boardImages.add(it)
+                                boardImages = boardImages.toMutableList().apply {
+                                    add(it)
+                                }
                             }
                         } catch (e: Exception) {
                             Log.e("YourActivity", "Error during image conversion", e)
@@ -161,7 +163,9 @@ class WriteActivity : AppCompatActivity() {
     private fun writePost(data: CommunityWriteRequest) {
         lifecycleScope.launch {
             try {
+                Log.e("WriteActivity", boardImages.toString())
                 val response = communityService.createCommunityPost("basic", data, boardImages)
+                Log.e("WriteActivity", response.toString())
                 Toast.makeText(this@WriteActivity, "글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             } catch (e: Exception) {

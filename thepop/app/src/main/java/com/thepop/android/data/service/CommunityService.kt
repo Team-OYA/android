@@ -27,7 +27,7 @@ interface CommunityService {
     suspend fun createCommunityPostVote(
         @Query("type") type: String = "vote",
         @Part("data") data: CommunityWriteVoteRequest?,
-        @Part images: List<MultipartBody.Part>  // 여러 이미지를 보내는 데에는 List를 사용합니다.
+        @Part images: List<MultipartBody.Part>
     ): BaseResponse
 
     @Multipart
@@ -35,7 +35,7 @@ interface CommunityService {
     suspend fun createCommunityPost(
         @Query("type") type: String = "basic",
         @Part("data") data: CommunityWriteRequest?,
-        @Part images: List<MultipartBody.Part>  // 여러 이미지를 보내는 데에는 List를 사용합니다.
+        @Part images: List<MultipartBody.Part>
     ): BaseResponse
 
     @POST("votes/{voteId}/check")
