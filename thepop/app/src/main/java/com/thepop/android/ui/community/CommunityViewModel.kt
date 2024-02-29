@@ -36,6 +36,7 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = communityService.getCommunityList(type, pageNo, amount)
+                Log.e("getPaginationCommunityPostList", response.toString())
                 if (response.data.communityDetailResponseList.isEmpty()) {
                     Log.e("getPaginationCommunityPostList", "데이터가 없습니다.")
                 } else {
@@ -57,8 +58,7 @@ class CommunityViewModel @Inject constructor(
     fun checkVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = communityService.checkVote(voteId)
-                Log.e("checkVote", response.toString())
+                communityService.checkVote(voteId)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("checkVote", e.toString())
@@ -69,8 +69,7 @@ class CommunityViewModel @Inject constructor(
     fun cancelVote(voteId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = communityService.cancelVote(voteId)
-                Log.e("cancelVote", response.toString())
+                communityService.cancelVote(voteId)
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("cancelVote", e.toString())
@@ -85,6 +84,7 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = communityService.getCommunityDetail(postId)
+                Log.e("getCommunityDetail", response.toString())
                 _communityDetail.postValue(response.data)
             } catch (e: Exception) {
                 Log.e("getCommunityDetail", e.toString())

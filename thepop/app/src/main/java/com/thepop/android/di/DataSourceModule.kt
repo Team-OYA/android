@@ -1,10 +1,13 @@
 package com.thepop.android.di
 
+import com.thepop.android.data.service.BusinessService
 import com.thepop.android.data.service.CommunityService
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.data.service.UserService
 import com.thepop.android.data.source.LocalDataSource
 import com.thepop.android.data.source.LocalDataSourceImpl
+import com.thepop.android.data.source.remote.business.BusinessDataSource
+import com.thepop.android.data.source.remote.business.BusinessDataSourceImpl
 import com.thepop.android.data.source.remote.community.CommunityDataSource
 import com.thepop.android.data.source.remote.community.CommunityDataSourceImpl
 import com.thepop.android.data.source.remote.popup.PopupDataSource
@@ -40,5 +43,10 @@ object DataSourceModule {
     @Singleton
     fun provideUserService(service: CommunityService): CommunityDataSource =
         CommunityDataSourceImpl(service)
+
+    @Provides
+    @Singleton
+    fun provideBusinessService(service: BusinessService): BusinessDataSource =
+        BusinessDataSourceImpl(service)
 
 }

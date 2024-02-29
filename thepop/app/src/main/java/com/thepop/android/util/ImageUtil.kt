@@ -38,7 +38,7 @@ class ImageUtil {
 
                     // 파일을 MultipartBody.Part로 변환
                     val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                    MultipartBody.Part.createFormData("groupImage", file.name, requestFile)
+                    MultipartBody.Part.createFormData("images", file.name, requestFile)
                 } catch (e: Exception) {
                     Log.e("ImageConvert", "Failed to convert image from URI to MultipartBody.Part", e)
                     null

@@ -34,7 +34,7 @@ class WriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteBinding
     private var addImageList: ArrayList<Uri> = ArrayList()
-    private var boardImages: ArrayList<MultipartBody.Part> = ArrayList()
+    private var boardImages: List<MultipartBody.Part> = emptyList()
     @Inject lateinit var communityService: CommunityService
     private var writeVoteData: CommunityVoteWriteData? = null
     private var writeData: CommunityWriteData? = null
@@ -63,26 +63,28 @@ class WriteActivity : AppCompatActivity() {
         binding.btnComplete.setOnClickListener {
             if (binding.editTitle.text.toString().isNotBlank() && binding.editContent.text.toString().isNotBlank()) {
                 if (binding.etPostVote1.text.isNotBlank() && binding.etPostVote2.text.isNotBlank()) {
-                    writeVoteData?.apply {
-                        title = binding.editTitle.text.toString()
-                        description = binding.editContent.text.toString()
-                        categoryCode = categoryCode
-                        votes.add(binding.etPostVote1.text.toString())
-                        votes.add(binding.etPostVote2.text.toString())
-                    }
+                    writeVoteData = CommunityVoteWriteData(
+                        title = binding.editTitle.text.toString(),
+                        description = binding.editContent.text.toString(),
+                        categoryCode = categoryCode,
+                        votes = listOf(
+                            binding.etPostVote1.text.toString(),
+                            binding.etPostVote2.text.toString()
+                        )
+                    )
+
+                    Log.e("WriteVoteData", writeVoteData.toString())
 
                     val postDTO = CommunityWriteVoteRequest(
-                        data = CommunityWriteVoteRequest.CommunityWriteData(
                             title = writeVoteData!!.title,
                             description = writeVoteData!!.description,
                             categoryCode = writeVoteData!!.categoryCode,
                             votes = writeVoteData!!.votes
                         )
-                    )
 
                     writeVotePost(postDTO)
 
-                } else if (binding.etPostVote1.text == null || binding.etPostVote2.text == null) {
+                } else if (binding.etPostVote1.text.isNotBlank() || binding.etPostVote2.text.isNotBlank()) {
                     Toast.makeText(this, "투표 항목을 모두 입력해주세요", Toast.LENGTH_SHORT).show()
                 } else {
                     writeData = CommunityWriteData(
@@ -92,12 +94,11 @@ class WriteActivity : AppCompatActivity() {
                     )
 
                     val postDTO = CommunityWriteRequest(
-                        data = CommunityWriteRequest.CommunityWriteData(
                             title = writeData!!.title,
                             description = writeData!!.description,
                             categoryCode = writeData!!.categoryCode
-                        )
                     )
+
 
                     writePost(postDTO)
                 }
@@ -137,8 +138,9 @@ class WriteActivity : AppCompatActivity() {
                         try {
                             val boardImage = ImageUtil.createImagePartFromUri(this@WriteActivity, imageUri)
                             boardImage?.let {
-                                boardImages.add(it)
-                                Log.e("WriteActivity", boardImages.toString())
+                                boardImages = boardImages.toMutableList().apply {
+                                    add(it)
+                                }
                             }
                         } catch (e: Exception) {
                             Log.e("YourActivity", "Error during image conversion", e)
@@ -161,6 +163,7 @@ class WriteActivity : AppCompatActivity() {
     private fun writePost(data: CommunityWriteRequest) {
         lifecycleScope.launch {
             try {
+                Log.e("WriteActivity", boardImages.toString())
                 val response = communityService.createCommunityPost("basic", data, boardImages)
                 Log.e("WriteActivity", response.toString())
                 Toast.makeText(this@WriteActivity, "글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
@@ -175,7 +178,6 @@ class WriteActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = communityService.createCommunityPostVote("vote", data, boardImages)
-                Log.e("WriteActivity", response.toString())
                 Toast.makeText(this@WriteActivity, "글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             } catch (e: Exception) {

@@ -84,4 +84,9 @@
 	<string name="dialog_delete">삭제하기</string>
 	<string name="dialog_cancel">취소</string>
 
+	<!-- Business -->
+	<string name="business_title">쥐구멍스토어</string>
+	<string name="business_count">팝업 게시글</string>
+	<string name="business_num">2</string>
+
 </resources>

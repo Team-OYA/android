@@ -1,5 +1,6 @@
 package com.thepop.android.di
 
+import com.thepop.android.data.service.BusinessService
 import com.thepop.android.data.service.CommunityService
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.data.service.UserService
@@ -28,5 +29,10 @@ object ServiceModule {
     @Singleton
     fun provideCommunityService(retrofit: Retrofit): CommunityService =
         retrofit.create(CommunityService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBusinessService(retrofit: Retrofit): BusinessService =
+        retrofit.create(BusinessService::class.java)
 
 }
