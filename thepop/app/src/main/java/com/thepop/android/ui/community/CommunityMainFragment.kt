@@ -54,6 +54,7 @@ class CommunityMainFragment : Fragment() {
     private fun dataObserver() {
         communityViewModel.communityPostList.observe(viewLifecycleOwner) {
             setCommunityList(it)
+            Log.e("dataObserver", it.toString())
         }
     }
 
@@ -104,15 +105,22 @@ class CommunityMainFragment : Fragment() {
         }
     }
     private fun scrollListener() {
-        binding.rvCommunityPost.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val onScrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
                     pageNo += 1
                     communityViewModel.getPaginationCommunityPostList(type, pageNo, 10)
                 }
             }
-        })
+        }
+
+        // 이전에 추가된 모든 스크롤 리스너를 제거
+        binding.rvCommunityPost.clearOnScrollListeners()
+
+        // 새로운 스크롤 리스너를 추가
+        binding.rvCommunityPost.addOnScrollListener(onScrollListener)
     }
+
 
     override fun onResume() {
         super.onResume()

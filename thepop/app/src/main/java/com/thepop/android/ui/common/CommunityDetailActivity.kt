@@ -81,7 +81,6 @@ class CommunityDetailActivity : AppCompatActivity() {
 
     private fun setCommunityDetail() {
         viewModel.communityDetail.observe(this) { response ->
-            Log.e("CommunityDetailActivity", response.toString())
             response?.let {
                 binding.tvPostTitle.text = it.title
                 binding.tvPostContent.text = it.description

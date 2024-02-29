@@ -36,12 +36,11 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = communityService.getCommunityList(type, pageNo, amount)
-                Log.e("getPaginationCommunityPostList", response.toString())
                 if (response.data.communityDetailResponseList.isEmpty()) {
                     Log.e("getPaginationCommunityPostList", "데이터가 없습니다.")
                 } else {
-                    // 기존 목록에 새 페이지의 데이터를 추가합니다.
-                    val currentList = _communityPostList.value?.communityDetailResponseList?.toMutableList()
+                    val currentList =
+                        _communityPostList.value?.communityDetailResponseList?.toMutableList()
                         ?: mutableListOf()
                     currentList.addAll(response.data.communityDetailResponseList)
                     _communityPostList.postValue(CommunityListResponse.CommunityDetailResponseList(currentList))
@@ -84,7 +83,6 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = communityService.getCommunityDetail(postId)
-                Log.e("getCommunityDetail", response.toString())
                 _communityDetail.postValue(response.data)
             } catch (e: Exception) {
                 Log.e("getCommunityDetail", e.toString())
