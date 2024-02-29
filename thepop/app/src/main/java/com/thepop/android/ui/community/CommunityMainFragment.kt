@@ -84,16 +84,19 @@ class CommunityMainFragment : Fragment() {
                     R.id.rb_community_all -> {
                         pageNo = 0
                         type = "all"
+                        binding.fabCommunity.visibility = View.VISIBLE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_ad -> {
                         pageNo = 0
                         type = "business"
+                        binding.fabCommunity.visibility = View.GONE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_user -> {
                         pageNo = 0
                         type = "user"
+                        binding.fabCommunity.visibility = View.VISIBLE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                 }
