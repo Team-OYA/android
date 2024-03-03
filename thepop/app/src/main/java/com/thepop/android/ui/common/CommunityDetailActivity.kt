@@ -201,5 +201,6 @@ class CommunityDetailActivity : AppCompatActivity() {
         binding.tvPostVotePercent2.visibility = android.view.View.VISIBLE
         binding.tvPostVotePercent1.text = "${votePercent1}%"
         binding.tvPostVotePercent2.text = "${votePercent2}%"
+        Log.e("voteData", "voteSum1: $voteSum1, voteSum2: $voteSum2")
     }
 }

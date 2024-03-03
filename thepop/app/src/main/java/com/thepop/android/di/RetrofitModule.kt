@@ -34,7 +34,7 @@ object RetrofitModule {
                 .addHeader("Authorization", "Bearer ${localDataSource.getAccessToken()}")
                 .build()
             val response = chain.proceed(request)
-            if (response.code == 401) {
+            if (response.code == 401 || response.code == 403) {
                 handel401Error(context, localDataSource)
             }
             response

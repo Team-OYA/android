@@ -55,4 +55,9 @@ class MypageCommunityFragment : Fragment() {
         recyclerViewList.adapter = adapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        getMypagePopup()
+    }
+
 }

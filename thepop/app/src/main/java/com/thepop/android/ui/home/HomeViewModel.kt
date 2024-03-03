@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.popup.PopupDetailResponse
 import com.thepop.android.data.model.popup.PopupListResponse
+import com.thepop.android.data.service.CommunityService
 import com.thepop.android.data.service.PopupService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val popupService: PopupService
+    private val popupService: PopupService,
 ) : ViewModel() {
 
     private val _popupRecommendList: MutableLiveData<PopupListResponse.PopupList> = MutableLiveData()
@@ -75,4 +77,17 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun scrapPopup(popupId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = popupService.scrapPopup(popupId)
+                Log.e("scrapPopup", response.toString())
+            } catch (e: Exception) {
+                Log.e("scrapPopup", e.toString())
+                e.printStackTrace()
+            }
+        }
+    }
+
 }

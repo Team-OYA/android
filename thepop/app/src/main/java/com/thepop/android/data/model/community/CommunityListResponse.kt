@@ -9,7 +9,7 @@ data class CommunityListResponse(
     @SerializedName("data") val data: CommunityDetailResponseList
 ) {
     data class CommunityDetailResponseList(
-        @SerializedName("communityDetailResponseList") val communityDetailResponseList: List<CommunityDetail>
+        @SerializedName("communityDetailResponseList") var communityDetailResponseList: List<CommunityDetail>
     ) {
         @Parcelize
         data class CommunityDetail(

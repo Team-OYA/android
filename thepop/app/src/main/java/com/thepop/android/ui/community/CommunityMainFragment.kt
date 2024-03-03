@@ -24,6 +24,7 @@ class CommunityMainFragment : Fragment() {
     private val communityViewModel by viewModels<CommunityViewModel>()
     private var pageNo = 0
     private var type = "all"
+    private lateinit var adapter: CommunityListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,18 +49,42 @@ class CommunityMainFragment : Fragment() {
     }
 
     private fun getCommunityList() {
-        communityViewModel.getCommunityPostList("all", 0, 10)
+        when (binding.rgCommunity.checkedRadioButtonId) {
+            R.id.rb_community_all -> {
+                type = "all"
+                communityViewModel.getCommunityPostList(type, pageNo, 10)
+            }
+            R.id.rb_community_ad -> {
+                type = "business"
+                communityViewModel.getCommunityPostList(type, pageNo, 10)
+            }
+            R.id.rb_community_user -> {
+                type = "user"
+                communityViewModel.getCommunityPostList(type, pageNo, 10)
+            }
+        }
+
     }
 
     private fun dataObserver() {
         communityViewModel.communityPostList.observe(viewLifecycleOwner) {
             setCommunityList(it)
         }
+
+        communityViewModel.communityAdditionPostList.observe(viewLifecycleOwner) {
+            Log.e("dataObserver", it.toString())
+            try {
+                adapter.addItems(it.communityDetailResponseList)
+            } catch (e: Exception) {
+                Log.e("dataObserver", e.toString())
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun setCommunityList(data: CommunityListResponse.CommunityDetailResponseList) {
         val recyclerViewList = binding.rvCommunityPost
-        val adapter = CommunityListAdapter(communityViewModel, data)
+        adapter = CommunityListAdapter(communityViewModel, data)
         recyclerViewList.layoutManager = GridLayoutManager(
             requireContext(), 1, GridLayoutManager.VERTICAL, false
         )
@@ -70,6 +95,7 @@ class CommunityMainFragment : Fragment() {
         binding.rbCommunityAll.setOnClickListener { onRadioButtonClicked(binding.rbCommunityAll) }
         binding.rbCommunityAd.setOnClickListener { onRadioButtonClicked(binding.rbCommunityAd) }
         binding.rbCommunityUser.setOnClickListener { onRadioButtonClicked(binding.rbCommunityUser) }
+        pageNo = 0
         goWrite()
         getCommunityList()
         dataObserver()
@@ -84,16 +110,19 @@ class CommunityMainFragment : Fragment() {
                     R.id.rb_community_all -> {
                         pageNo = 0
                         type = "all"
+                        binding.fabCommunity.visibility = View.VISIBLE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_ad -> {
                         pageNo = 0
                         type = "business"
+                        binding.fabCommunity.visibility = View.GONE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_user -> {
                         pageNo = 0
                         type = "user"
+                        binding.fabCommunity.visibility = View.VISIBLE
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                 }
@@ -101,18 +130,33 @@ class CommunityMainFragment : Fragment() {
         }
     }
     private fun scrollListener() {
-        binding.rvCommunityPost.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val onScrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (!recyclerView.canScrollVertically(1)) {
                     pageNo += 1
                     communityViewModel.getPaginationCommunityPostList(type, pageNo, 10)
                 }
             }
-        })
+        }
+
+        binding.rvCommunityPost.clearOnScrollListeners()
+
+        binding.rvCommunityPost.addOnScrollListener(onScrollListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        init()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        init()
     }
 
     override fun onResume() {
         super.onResume()
         init()
     }
+
 }

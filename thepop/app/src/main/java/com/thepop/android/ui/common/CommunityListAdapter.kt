@@ -29,6 +29,20 @@ class CommunityListAdapter(
         return communityPostList.communityDetailResponseList.size
     }
 
+    fun addItems(items: List<CommunityListResponse.CommunityDetailResponseList.CommunityDetail>) {
+        if (items.isNotEmpty()) {
+            val mutableList = communityPostList.communityDetailResponseList.toMutableList()
+            val currentSize = mutableList.size
+            mutableList.addAll(items)
+            communityPostList.communityDetailResponseList = mutableList
+
+            notifyItemRangeInserted(currentSize, items.size)
+        }
+    }
+
+
+
+
     inner class CommunityViewHolder(private val binding: RvCommunityPostBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private var isVoteFirst = false
@@ -48,7 +62,9 @@ class CommunityListAdapter(
                             isVoteFirst = true
                             isVoteSecond = false
                             voteSum1++
-                            voteSum2--
+                            if (voteSum2 != 0) {
+                                voteSum2--
+                            }
                             binding.clPostVote1.background =
                                 binding.root.context.getDrawable(R.drawable.bg_vote_true)
                             binding.clPostVote2.background =
@@ -70,7 +86,9 @@ class CommunityListAdapter(
 
                             isVoteFirst = false
                             isVoteSecond = true
-                            voteSum1--
+                            if (voteSum1 != 0) {
+                                voteSum1--
+                            }
                             voteSum2++
                             binding.clPostVote1.background =
                                 binding.root.context.getDrawable(R.drawable.bg_vote)
@@ -113,16 +131,17 @@ class CommunityListAdapter(
             binding.tvPostInfoUserName.text = communityPost.nickname
             binding.tvPostInfoDate.text = communityPost.createdDate
 
-            val voteResponseList = communityPost.voteResponseList ?: return
-            try {
+            val voteResponseList = communityPost.voteResponseList
+            if (voteResponseList != null) {
+                // voteResponseList가 null이 아닌 경우에만 처리
                 if (voteResponseList.size >= 2) {
                     binding.clPostVote.visibility = android.view.View.VISIBLE
-                    binding.tvPostVote1.text = communityPost.voteResponseList?.get(0)?.content
-                    binding.tvPostVote2.text = communityPost.voteResponseList?.get(1)?.content
-                    isVoteFirst = communityPost.voteResponseList[0].checked
-                    isVoteSecond = communityPost.voteResponseList[1].checked
-                    voteSum1 = communityPostList.communityDetailResponseList[adapterPosition].voteResponseList[0].voteSum
-                    voteSum2 = communityPostList.communityDetailResponseList[adapterPosition].voteResponseList[1].voteSum
+                    binding.tvPostVote1.text = voteResponseList[0].content
+                    binding.tvPostVote2.text = voteResponseList[1].content
+                    isVoteFirst = voteResponseList[0].checked
+                    isVoteSecond = voteResponseList[1].checked
+                    voteSum1 = voteResponseList[0].voteSum
+                    voteSum2 = voteResponseList[1].voteSum
 
                     if (isVoteFirst or isVoteSecond) {
                         setVotePercent(voteSum1, voteSum2)
@@ -136,10 +155,12 @@ class CommunityListAdapter(
                         binding.tvPostVote2.setTextAppearance(R.style.votedTrue)
                     }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("CommunityViewHolder", e.toString())
+            } else {
+                // voteResponseList가 null인 경우에 대한 처리
+                binding.clPostVote.visibility = android.view.View.GONE
             }
+
+
 
         }
 

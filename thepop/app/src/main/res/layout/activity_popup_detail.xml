@@ -45,40 +45,63 @@
 			<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:paddingTop="12dp"
-				android:layout_marginStart="16dp"
-				android:layout_marginEnd="16dp">
+				android:paddingTop="12dp">
 				<TextView
 					android:id="@+id/tv_popup_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:text="@string/home_pop_up_title"
 					android:textSize="22sp"
+					android:layout_marginStart="16dp"
+					android:layout_marginEnd="16dp"
 					android:fontFamily="@font/pretendard_semibold"
 					app:layout_constraintTop_toTopOf="parent">
 				</TextView>
 
-				<TextView
-					android:id="@+id/tv_popup_date"
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:id="@+id/cl_date"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/home_pop_up_date"
-					android:textColor="@color/gray5"
-					android:layout_marginTop="8dp"
-					android:textSize="13sp"
+					android:layout_marginStart="16dp"
+					android:layout_marginEnd="16dp"
 					app:layout_constraintTop_toBottomOf="@id/tv_popup_title">
-				</TextView>
+
+					<TextView
+						android:id="@+id/tv_popup_date"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@string/home_pop_up_date"
+						android:textColor="@color/gray5"
+						android:layout_marginTop="8dp"
+						android:textSize="13sp"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintBottom_toBottomOf="parent">
+					</TextView>
+
+					<ImageView
+						android:id="@+id/btn_bookmark"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/vi_bookmark_false"
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent">
+					</ImageView>
+				</androidx.constraintlayout.widget.ConstraintLayout>
 
 				<View
 					android:id="@+id/v_div"
 					android:layout_width="match_parent"
 					android:layout_height="2dp"
 					android:layout_marginTop="12dp"
+					android:layout_marginStart="16dp"
+					android:layout_marginEnd="16dp"
 					android:background="@color/black"
-					app:layout_constraintTop_toBottomOf="@id/tv_popup_date">
+					app:layout_constraintTop_toBottomOf="@id/cl_date">
 				</View>
 
-				<TextView
+				<androidx.compose.ui.platform.ComposeView
 					android:id="@+id/tv_popup_content"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -87,7 +110,7 @@
 					android:textColor="@color/gray_text"
 					android:layout_marginTop="16dp"
 					app:layout_constraintTop_toBottomOf="@id/v_div">
-				</TextView>
+				</androidx.compose.ui.platform.ComposeView>
 			</androidx.constraintlayout.widget.ConstraintLayout>
 		</ScrollView>
 

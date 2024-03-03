@@ -29,12 +29,19 @@ class PopupRecommendAdapter (private val popupList: PopupListResponse.PopupList)
         fun bind(popup: PopupListResponse.PopupList.Popup) {
             binding.tvPopupTitle.text = popup.title
             binding.tvPopupContent.text = popup.description
-            Glide.with(binding.root)
-                .load(popup.thumbnail)
-                .into(binding.ivPopup)
+            if (popup.thumbnail == "not") {
+                binding.ivPopup.visibility = android.view.View.GONE
+            } else {
+                Glide.with(binding.root)
+                    .load(popup.thumbnail)
+                    .into(binding.ivPopup)
+            }
             binding.tvPopupStartDate.text = popup.openDate
             binding.tvPopupEndDate.text = popup.closeDate
             binding.tvPopupTag.text = popup.category.description
+            if (popup.thumbnail == null) {
+                binding.ivPopup.visibility = android.view.View.GONE
+            }
 
             binding.root.setOnClickListener {
                 goToPopupDetail(popup.popupId)

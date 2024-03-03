@@ -11,9 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.thepop.android.R
+import com.thepop.android.data.model.community.CommunityListResponse
 import com.thepop.android.data.model.popup.PopupListResponse
 import com.thepop.android.databinding.FragmentHomeMainBinding
+import com.thepop.android.ui.common.CommunityListAdapter
 import com.thepop.android.ui.common.PopupRecommendAdapter
+import com.thepop.android.ui.community.CommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +24,7 @@ class HomeMainFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeMainBinding
     private val homeViewModel by viewModels<HomeViewModel>()
+    private val communityViewModel by viewModels<CommunityViewModel>()
     private val adImageList = arrayListOf<Int>()
     private val handler = Handler(Looper.getMainLooper())
     private var currentPage = 0
@@ -46,7 +50,13 @@ class HomeMainFragment : Fragment() {
         setupViewPager()
         startAutoScroll()
         getPopupRecommendList()
+        getCommunityRecommendList()
         dataObserver()
+    }
+
+    private fun init() {
+        getCommunityRecommendList()
+        getPopupRecommendList()
     }
 
     private fun setupViewPager() {
@@ -115,13 +125,35 @@ class HomeMainFragment : Fragment() {
         homeViewModel.popupRecommendList.observe(viewLifecycleOwner) {
             setPopupRecommendList(it)
         }
+
+        communityViewModel.communityPostList.observe(viewLifecycleOwner) {
+            setCommunityRecommendList(it)
+        }
     }
 
     private fun setPopupRecommendList(popupList: PopupListResponse.PopupList) {
         val adapter = PopupRecommendAdapter(popupList)
         binding.rvHomeRecommend.layoutManager = GridLayoutManager(
-            requireContext(), 1, GridLayoutManager.HORIZONTAL, false)
+            requireContext(), 1, GridLayoutManager.VERTICAL, false)
         binding.rvHomeRecommend.adapter = adapter
     }
+
+    private fun getCommunityRecommendList() {
+        communityViewModel.getCommunityPostList("all", 0, 10)
+    }
+
+    private fun setCommunityRecommendList(communityList: CommunityListResponse.CommunityDetailResponseList) {
+        val adapter = CommunityListAdapter(communityViewModel, communityList)
+        binding.rvHomeCommunity.layoutManager = GridLayoutManager(
+            requireContext(), 1, GridLayoutManager.VERTICAL, false)
+        binding.rvHomeCommunity.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
+    }
+
+
 }
 
