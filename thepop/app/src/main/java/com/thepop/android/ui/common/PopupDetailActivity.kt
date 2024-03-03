@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
 import androidx.lifecycle.lifecycleScope
+import com.mukesh.MarkDown
 import com.thepop.android.R
 import com.thepop.android.data.service.PopupService
 import com.thepop.android.databinding.ActivityPopupDetailBinding
-import com.thepop.android.ui.community.CommunityViewModel
 import com.thepop.android.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,7 +31,6 @@ class PopupDetailActivity: AppCompatActivity() {
         setContentView(binding.root)
         popupId = intent.getIntExtra("popupId", 1)
 
-
         getPopupDetail()
         init()
     }
@@ -43,7 +43,13 @@ class PopupDetailActivity: AppCompatActivity() {
         viewModel.popupDetail.observe(this) {
             lifecycleScope.launch {
                 binding.tvPopupTitle.text = it.title
-                binding.tvPopupContent.text = it.description
+                binding.tvPopupContent.setContent {
+                    MaterialTheme {
+                        MarkDown(
+                            text = it.description,
+                        )
+                    }
+                }
                 binding.tvPopupDate.text = it.pulledDate
                 isScraped = it.collected
                 if (isScraped) {
@@ -85,6 +91,7 @@ class PopupDetailActivity: AppCompatActivity() {
             scrapPopup(popupId)
         }
     }
+
 
     override fun onStop() {
         finish()

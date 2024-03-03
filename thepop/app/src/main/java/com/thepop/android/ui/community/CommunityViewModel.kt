@@ -26,25 +26,21 @@ class CommunityViewModel @Inject constructor(
             try {
                 val response = communityService.getCommunityList(type, pageNo, amount)
                 _communityPostList.postValue(response.data)
+                Log.e("getCommunityPostList", response.toString())
             } catch (e: Exception) {
                 Log.e("getCommunityPostList", e.toString())
             }
         }
     }
 
+    private val _communityAdditionPostList: MutableLiveData<CommunityListResponse.CommunityDetailResponseList> = MutableLiveData()
+    val communityAdditionPostList: LiveData<CommunityListResponse.CommunityDetailResponseList> = _communityAdditionPostList
+
     fun getPaginationCommunityPostList(type: String, pageNo: Int, amount: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             try {
                 val response = communityService.getCommunityList(type, pageNo, amount)
-                if (response.data.communityDetailResponseList.isEmpty()) {
-                    Log.e("getPaginationCommunityPostList", "데이터가 없습니다.")
-                } else {
-                    val currentList =
-                        _communityPostList.value?.communityDetailResponseList?.toMutableList()
-                        ?: mutableListOf()
-                    currentList.addAll(response.data.communityDetailResponseList)
-                    _communityPostList.postValue(CommunityListResponse.CommunityDetailResponseList(currentList))
-                }
+                _communityAdditionPostList.postValue(response.data)
             } catch (e: Exception) {
                 Log.e("getPaginationCommunityPostList", e.toString())
             }
@@ -93,14 +89,22 @@ class CommunityViewModel @Inject constructor(
     fun deleteCommunityPost(postId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = communityService.deleteCommunityPost(postId)
-                Log.e("deleteCommunityPost", response.toString())
+                communityService.deleteCommunityPost(postId)
+                // 현재 게시물 목록에서 postId와 일치하지 않는 게시물만 필터링하여 새로운 목록을 생성합니다.
+                val updatedList = _communityPostList.value?.communityDetailResponseList?.filter { it.communityId != postId } ?: listOf()
+                // 새로운 CommunityDetailResponseList 객체를 생성하여 업데이트된 목록을 포함시킵니다.
+                val updatedResponseList = CommunityListResponse.CommunityDetailResponseList(updatedList)
+                // LiveData를 새로운 값으로 업데이트합니다.
+                _communityPostList.postValue(updatedResponseList)
+                Log.e("deleteCommunityPost", "Post deleted successfully.")
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.e("deleteCommunityPost", e.toString())
             }
         }
     }
+
+
 
     fun scrapCommunityPost(postId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -125,5 +129,6 @@ class CommunityViewModel @Inject constructor(
             }
         }
     }
+
 
 }

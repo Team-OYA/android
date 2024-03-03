@@ -26,6 +26,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
 
         // BuildConfig 필드 및 manifestPlaceholders 설정
         buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("base_url")}\"")
@@ -53,6 +56,11 @@ android {
         viewBinding = true
         dataBinding = true
         buildConfig = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 }
 
@@ -84,6 +92,13 @@ dependencies {
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.kakao.sdk:v2-user:2.15.0")
+    implementation("com.github.mukeshsolanki:MarkdownView-Android:2.0.0")
+    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
 }
 
 kapt {

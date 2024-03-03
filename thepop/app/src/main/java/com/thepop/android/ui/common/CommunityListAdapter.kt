@@ -29,6 +29,19 @@ class CommunityListAdapter(
         return communityPostList.communityDetailResponseList.size
     }
 
+    fun addItems(items: List<CommunityListResponse.CommunityDetailResponseList.CommunityDetail>) {
+        Log.e("addItems - item", items.toString())
+        if (items.isNotEmpty()) {
+            val currentSize = communityPostList.communityDetailResponseList.size
+            Log.e("addItems - before", currentSize.toString())
+            communityPostList.communityDetailResponseList.toMutableList().addAll(items)
+            Log.e("addItems - after", communityPostList.communityDetailResponseList.size.toString())
+            notifyItemRangeInserted(currentSize, items.size)
+        }
+    }
+
+
+
     inner class CommunityViewHolder(private val binding: RvCommunityPostBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private var isVoteFirst = false
