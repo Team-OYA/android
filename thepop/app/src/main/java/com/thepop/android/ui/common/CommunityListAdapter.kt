@@ -33,6 +33,7 @@ class CommunityListAdapter(
         if (items.isNotEmpty()) {
             val mutableList = communityPostList.communityDetailResponseList.toMutableList()
             val currentSize = mutableList.size
+            Log.e("addItems", items.toString())
             mutableList.addAll(items)
             communityPostList.communityDetailResponseList = mutableList
 
@@ -40,7 +41,10 @@ class CommunityListAdapter(
         }
     }
 
-
+    fun clearItems() {
+        communityPostList.communityDetailResponseList = mutableListOf()
+        notifyDataSetChanged()
+    }
 
 
     inner class CommunityViewHolder(private val binding: RvCommunityPostBinding) : RecyclerView.ViewHolder(binding.root) {
