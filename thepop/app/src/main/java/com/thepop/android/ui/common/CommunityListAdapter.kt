@@ -33,7 +33,6 @@ class CommunityListAdapter(
         if (items.isNotEmpty()) {
             val mutableList = communityPostList.communityDetailResponseList.toMutableList()
             val currentSize = mutableList.size
-            Log.e("addItems", items.toString())
             mutableList.addAll(items)
             communityPostList.communityDetailResponseList = mutableList
 

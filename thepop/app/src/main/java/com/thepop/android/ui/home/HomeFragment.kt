@@ -1,21 +1,20 @@
 package com.thepop.android.ui.home
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
 import androidx.fragment.app.Fragment
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.core.widget.NestedScrollView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.thepop.android.R
 import com.thepop.android.databinding.FragmentHomeBinding
+import com.thepop.android.util.BackgroundChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-
+class HomeFragment : Fragment(), BackgroundChangeListener {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -67,7 +66,15 @@ class HomeFragment : Fragment() {
                 binding.ivSearch.setImageResource(R.drawable.vi_search_white)
                 binding.tlHome.tabTextColors = resources.getColorStateList(R.drawable.color_tab_home_main)
                 binding.tlHome.setSelectedTabIndicatorColor(resources.getColor(R.color.white))
-                binding.fixed.setBackgroundColor(resources.getColor(R.color.transparent))
+                binding.fixed.background = resources.getDrawable(R.drawable.bg_toolbar_top)
+                binding.nsvHome.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+                    // 스크롤 위치에 따른 조건 확인
+                    if (scrollY > 0) {
+                        binding.fixed.background = resources.getDrawable(R.drawable.bg_toolbar)
+                    } else {
+                        binding.fixed.background = resources.getDrawable(R.drawable.bg_toolbar_top)
+                    }
+                }
             }
 
             else -> {
@@ -80,4 +87,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun changeBackground() {
+        binding.fixed.setBackgroundColor(resources.getColor(R.color.white))
+    }
 }
