@@ -130,6 +130,7 @@ class CommunityListAdapter(
             binding.ivPostBadge.visibility = if (communityPost.userType == "BUSINESS") android.view.View.VISIBLE else android.view.View.GONE
             binding.tvPostInfoUserName.text = communityPost.nickname
             binding.tvPostInfoDate.text = communityPost.createdDate
+            binding.tvPopupTag.text = communityPost.categoryDescription
 
             val voteResponseList = communityPost.voteResponseList
             if (voteResponseList != null) {
