@@ -82,7 +82,6 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = popupService.scrapPopup(popupId)
-                Log.e("scrapPopup", response.toString())
             } catch (e: Exception) {
                 Log.e("scrapPopup", e.toString())
                 e.printStackTrace()
