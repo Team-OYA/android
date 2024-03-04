@@ -26,7 +26,6 @@ class CommunityViewModel @Inject constructor(
             try {
                 val response = communityService.getCommunityList(type, pageNo, amount)
                 _communityPostList.postValue(response.data)
-                Log.e("getCommunityPostList", response.toString())
             } catch (e: Exception) {
                 Log.e("getCommunityPostList", e.toString())
             }

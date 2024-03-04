@@ -39,6 +39,7 @@ class CommunityMainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        dataObserver()
     }
 
     private fun goWrite() {
@@ -74,6 +75,7 @@ class CommunityMainFragment : Fragment() {
         communityViewModel.communityAdditionPostList.observe(viewLifecycleOwner) {
             Log.e("dataObserver", it.toString())
             try {
+                Log.e("data Add", it.communityDetailResponseList.toString())
                 adapter.addItems(it.communityDetailResponseList)
             } catch (e: Exception) {
                 Log.e("dataObserver", e.toString())
@@ -98,7 +100,6 @@ class CommunityMainFragment : Fragment() {
         pageNo = 0
         goWrite()
         getCommunityList()
-        dataObserver()
         scrollListener()
     }
 
@@ -111,6 +112,7 @@ class CommunityMainFragment : Fragment() {
                         pageNo = 0
                         type = "all"
                         binding.fabCommunity.visibility = View.VISIBLE
+
                         communityViewModel.getCommunityPostList(type, pageNo, 10)
                     }
                     R.id.rb_community_ad -> {
@@ -146,12 +148,12 @@ class CommunityMainFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        init()
+        adapter.clearItems()
     }
 
     override fun onPause() {
         super.onPause()
-        init()
+        adapter.clearItems()
     }
 
     override fun onResume() {

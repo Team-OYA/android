@@ -85,6 +85,7 @@ class CommunityDetailActivity : AppCompatActivity() {
                 binding.tvPostTitle.text = it.title
                 binding.tvPostContent.text = it.description
                 binding.tvPostInfoUserName.text = it.nickname
+                binding.tvPopupTag.text = it.categoryDescription
                 isScraped = it.collected
                 postImages = it.imageList
                 setupViewPager()
