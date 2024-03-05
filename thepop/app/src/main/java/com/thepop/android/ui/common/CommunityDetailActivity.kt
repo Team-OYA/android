@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.thepop.android.R
 import com.thepop.android.databinding.ActivityCommunityDetailBinding
 import com.thepop.android.ui.community.CommunityViewModel
@@ -86,6 +87,10 @@ class CommunityDetailActivity : AppCompatActivity() {
                 binding.tvPostContent.text = it.description
                 binding.tvPostInfoUserName.text = it.nickname
                 binding.tvPopupTag.text = it.categoryDescription
+                Glide.with(this)
+                    .load(it.profileUrl)
+                    .placeholder(R.drawable.img_default_user)
+                    .into(binding.ivPostInfoUser)
                 isScraped = it.collected
                 postImages = it.imageList
                 setupViewPager()
