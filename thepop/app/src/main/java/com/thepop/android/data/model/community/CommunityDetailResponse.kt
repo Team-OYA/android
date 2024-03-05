@@ -28,6 +28,7 @@ data class CommunityDetailResponse(
         @SerializedName("imageList") val imageList: List<String>,
         @SerializedName("written") val written: Boolean,
         @SerializedName("collected") val collected: Boolean,
+        @SerializedName("profileUrl") val profileUrl: String,
     )
 
     {

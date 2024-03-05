@@ -28,6 +28,7 @@ data class CommunityListResponse(
             @SerializedName("countView") val countView: Int,
             @SerializedName("voteResponseList") val voteResponseList: List<VoteResponse>,
             @SerializedName("imageList") val imageList: List<String>,
+            @SerializedName("profileUrl") val profileUrl: String,
         ) {
             @Parcelize
             data class VoteResponse(

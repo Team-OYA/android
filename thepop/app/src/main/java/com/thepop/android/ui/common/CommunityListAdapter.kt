@@ -130,6 +130,11 @@ class CommunityListAdapter(
                     .load(communityPost.imageList[0])
                     .into(binding.ivContents)
             }
+
+            Glide.with(binding.root.context)
+                .load(communityPost.profileUrl)
+                .placeholder(R.drawable.img_default_user)
+                .into(binding.ivPostInfoUser)
             binding.ivPostBadge.visibility = if (communityPost.userType == "BUSINESS") android.view.View.VISIBLE else android.view.View.GONE
             binding.tvPostInfoUserName.text = communityPost.nickname
             binding.tvPostInfoDate.text = communityPost.createdDate
